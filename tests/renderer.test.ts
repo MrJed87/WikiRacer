@@ -257,6 +257,67 @@ describe('GraphRenderer', () => {
       expect(await draw(0.5)).toContain(5.5);
     });
 
+    it('draws edges and arrowheads thicker or thinner in proportion to the scale', async () => {
+      const model = buildGraph([
+        { seq: 0, t: 0, type: 'RaceStarted', config: makeConfig(), racers, startedAtEpochMs: 0 },
+        {
+          seq: 1,
+          t: 10,
+          type: 'StepTaken',
+          racerId: 'm1',
+          step: 1,
+          from: 'Start',
+          to: 'Target',
+          index: 1,
+          usage: ZERO_USAGE,
+          latencyMs: 10,
+        },
+      ]);
+
+      /** Line width of the first edge stroke (the glow pass) in a frame. */
+      const edgeWidth = async (scale: number): Promise<number> => {
+        const widths: number[] = [];
+        Object.defineProperty(mockCtx, 'lineWidth', {
+          get: () => 1,
+          set: (v: number) => widths.push(v),
+          configurable: true,
+        });
+        const renderer = new GraphRenderer({
+          container: container as unknown as HTMLElement,
+          simulation: new GraphSimulation(),
+          getRacer: (id) => racers.find((r) => r.id === id),
+        });
+        renderer.setNodeScale(scale);
+        renderer.setModel(model);
+        await new Promise((r) => setTimeout(r, 40));
+        renderer.destroy();
+        return widths[0]!;
+      };
+
+      const normal = await edgeWidth(1);
+      expect(await edgeWidth(3)).toBeCloseTo(normal * 3, 5);
+      expect(await edgeWidth(2)).toBeCloseTo(normal * 2, 5);
+      // Never thinner than a hairline, even at 0.5x.
+      expect(await edgeWidth(0.5)).toBeGreaterThan(0.5);
+      expect(await edgeWidth(0.5)).toBeLessThan(normal);
+    });
+
+    it('keeps the same part of the graph centred when the layout stretches', () => {
+      const renderer = new GraphRenderer({
+        container: container as unknown as HTMLElement,
+        simulation: new GraphSimulation(),
+      });
+      renderer.camera.x = 100;
+      renderer.camera.y = -40;
+      renderer.setNodeScale(2);
+      expect(renderer.camera.x).toBe(200);
+      expect(renderer.camera.y).toBe(-80);
+      renderer.setNodeScale(1);
+      expect(renderer.camera.x).toBe(100);
+      expect(renderer.camera.y).toBe(-40);
+      renderer.destroy();
+    });
+
     it('keeps the default hit area when shrinking and grows it when enlarging', () => {
       const onClick = vi.fn();
       const sim = new GraphSimulation();

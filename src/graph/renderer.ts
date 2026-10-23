@@ -156,10 +156,19 @@ export class GraphRenderer {
     this.images.set(id, img);
   }
 
-  /** Resize every node (and the picture inside it) by this multiplier, within the allowed range. */
+  /**
+   * Resize every node (and the picture inside it) by this multiplier, within the allowed range.
+   * Edges follow: thicker or thinner lines and arrowheads here, longer or shorter in the layout.
+   */
   setNodeScale(scale: number): void {
-    this.nodeScale = clampNodeScale(scale);
-    this.sim.setNodeScale(this.nodeScale);
+    const next = clampNodeScale(scale);
+    const ratio = next / this.nodeScale;
+    this.nodeScale = next;
+    this.sim.setNodeScale(next);
+    // The layout stretches about the origin; carry the camera with it so the same part of the
+    // graph stays in the middle of the screen.
+    this.camera.x *= ratio;
+    this.camera.y *= ratio;
   }
 
   getNodeScale(): number {
@@ -388,9 +397,13 @@ export class GraphRenderer {
       entries.forEach(([racerId, count], i) => {
         const color = this.getRacerColor(racerId);
         const isDimmed = this.focusedRacerId !== null && this.focusedRacerId !== racerId;
-        const baseWidth = Math.max(1.2, 1.6 * this.camera.zoom);
+        // Lines scale with the nodes so they don't vanish next to big ones (or dominate small ones).
+        const baseWidth = Math.max(1.2, 1.6 * this.camera.zoom) * this.nodeScale;
         // Repeated-edge thickening: circling makes edges noticeably thicker!
-        const strokeWidth = baseWidth + Math.min(count - 1, 6) * 1.3;
+        const strokeWidth = Math.max(
+          0.8,
+          baseWidth + Math.min(count - 1, 6) * 1.3 * this.nodeScale,
+        );
 
         // Offset multi-racer parallel paths slightly perpendicular to edge
         const offsetDist =
@@ -426,11 +439,17 @@ export class GraphRenderer {
         ctx.stroke();
 
         // Directional arrowhead near the target node
-        if (len > 30) {
-          const arrowDist = 18 * this.camera.zoom;
+        if (len > 30 * this.nodeScale) {
+          // Sits just outside the target disc, so it moves out by however much the scale grew it.
+          const toNode = this.model?.nodes.get(edge.to);
+          const toHasImage = toNode ? this.readyImage(toNode.id) !== null : false;
+          const growth = toNode
+            ? this.nodeRadius(toNode, toHasImage) - this.nodeRadius(toNode, toHasImage, 1)
+            : 0;
+          const arrowDist = 18 * this.camera.zoom + growth;
           const arrowX = x2 - (dx / len) * arrowDist;
           const arrowY = y2 - (dy / len) * arrowDist;
-          const arrowSize = Math.max(3, 4.5 * Math.min(this.camera.zoom, 1.5));
+          const arrowSize = Math.max(3, 4.5 * Math.min(this.camera.zoom, 1.5)) * this.nodeScale;
 
           ctx.fillStyle = isDimmed ? withAlpha(color, 0.2) : color;
           ctx.beginPath();

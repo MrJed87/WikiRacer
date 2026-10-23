@@ -1,7 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NODE_SCALE, STORAGE_KEYS, clampNodeScale, formatNodeScale } from '../src/config';
 import { LAYOUT, GraphSimulation } from '../src/graph/simulation';
+import { buildGraph } from '../src/graph/graphModel';
+import { ZERO_USAGE } from '../src/llm/types';
+import type { Racer } from '../src/race/types';
 import { getNodeScale, storeNodeScale } from '../src/ui/storage';
+import { makeConfig } from './helpers/race';
 
 class MockStorage implements Storage {
   private store = new Map<string, string>();
@@ -94,30 +98,84 @@ describe('node scale storage', () => {
   });
 });
 
+/** Two articles joined by one click: the simplest graph that has an edge. */
+function twoNodeModel() {
+  const racers: Racer[] = [{ id: 'm1', label: 'Model One', colorIndex: 0 }];
+  return buildGraph([
+    { seq: 0, t: 0, type: 'RaceStarted', config: makeConfig(), racers, startedAtEpochMs: 0 },
+    {
+      seq: 1,
+      t: 10,
+      type: 'StepTaken',
+      racerId: 'm1',
+      step: 1,
+      from: 'Start',
+      to: 'Target',
+      index: 1,
+      usage: ZERO_USAGE,
+      latencyMs: 10,
+    },
+  ]);
+}
+
 describe('GraphSimulation node scale', () => {
-  /** A fresh d3 simulation starts hot; let it cool so reheating is observable. */
-  function settledSim(): GraphSimulation {
+  /** How far apart the two articles settle at a given node scale. */
+  function settledEdgeLength(scale: number): number {
     const sim = new GraphSimulation();
-    sim.step(1000);
-    expect(sim.active).toBe(false);
-    return sim;
+    sim.setNodeScale(scale);
+    sim.sync(twoNodeModel());
+    sim.step(5000);
+    const [a, b] = sim.nodes;
+    return Math.hypot(a!.x - b!.x, a!.y - b!.y);
   }
 
-  it('re-flows the layout when bigger nodes need more room', () => {
-    const sim = settledSim();
-    sim.setNodeScale(2);
-    expect(sim.alpha).toBeGreaterThanOrEqual(LAYOUT.alphaOnChange);
+  it('makes edges longer and shorter in step with the scale', () => {
+    const base = settledEdgeLength(1);
+    expect(base).toBeGreaterThan(0);
+    expect(settledEdgeLength(3) / base).toBeGreaterThan(2.7);
+    expect(settledEdgeLength(3) / base).toBeLessThan(3.3);
+    expect(settledEdgeLength(0.5) / base).toBeGreaterThan(0.45);
+    expect(settledEdgeLength(0.5) / base).toBeLessThan(0.55);
   });
 
-  it('leaves the layout alone for shrinking, or for the same spacing again', () => {
-    const sim = settledSim();
-    sim.setNodeScale(0.5);
-    expect(sim.active).toBe(false);
+  it('stretches an existing layout straight away instead of waiting for it to settle', () => {
+    const sim = new GraphSimulation();
+    sim.sync(twoNodeModel());
+    sim.step(5000);
+    const before = sim.nodes.map((n) => ({ x: n.x, y: n.y }));
+    sim.setNodeScale(2);
+    sim.nodes.forEach((n, i) => {
+      expect(n.x).toBeCloseTo(before[i]!.x * 2, 6);
+      expect(n.y).toBeCloseTo(before[i]!.y * 2, 6);
+    });
+    expect(sim.active).toBe(true);
+  });
 
-    sim.setNodeScale(2);
-    sim.step(1000);
+  it('carries pinned (dragged) nodes along with the stretch', () => {
+    const sim = new GraphSimulation();
+    sim.sync(twoNodeModel());
+    sim.pin('Start', 10, -20);
+    sim.setNodeScale(3);
+    const start = sim.nodeById('Start')!;
+    expect(start.fx).toBe(30);
+    expect(start.fy).toBe(-60);
+  });
+
+  it('does nothing when the scale has not changed', () => {
+    const sim = new GraphSimulation();
+    sim.sync(twoNodeModel());
+    sim.step(5000);
     expect(sim.active).toBe(false);
-    sim.setNodeScale(2);
+    sim.setNodeScale(1);
     expect(sim.active).toBe(false);
+  });
+
+  it('gives new nodes a birth distance that matches the scale', () => {
+    const sim = new GraphSimulation();
+    sim.setNodeScale(3);
+    sim.sync(twoNodeModel());
+    // Start has no parent so it is born at the origin; the target is born far away, scaled.
+    const target = sim.nodeById('Target')!;
+    expect(Math.hypot(target.x, target.y)).toBeGreaterThan(LAYOUT.targetSpawnDistance * 2);
   });
 });

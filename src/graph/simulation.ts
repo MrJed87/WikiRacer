@@ -33,6 +33,7 @@ export const LAYOUT = {
   chargeMaxDistance: 380,
   gravity: 0.035,
   // Leaves room for 15px picture nodes plus their rings without overlap (at node scale 1).
+  // Every length in here is for node scale 1; `setNodeScale` stretches them all by the scale.
   collideRadius: 18,
   /** How far from its parent a new node is born. */
   spawnMin: 34,
@@ -53,8 +54,13 @@ export class GraphSimulation {
     .id((d) => d.id)
     .distance(LAYOUT.linkDistance)
     .strength(LAYOUT.linkStrength);
+  private readonly charge = forceManyBody<SimNode>()
+    .strength(LAYOUT.charge)
+    .distanceMax(LAYOUT.chargeMaxDistance)
+    .theta(0.9);
   private readonly collide = forceCollide<SimNode>(LAYOUT.collideRadius);
-  private collideRadius: number = LAYOUT.collideRadius;
+  /** Node scale the layout is currently built for (1 = the original spacing). */
+  private nodeScale = 1;
   private seenVersion = -1;
   private lastModel: GraphModel | null = null;
   private readonly rng: () => number;
@@ -63,13 +69,7 @@ export class GraphSimulation {
     this.rng = seededRandom(seed);
     this.sim = forceSimulation<SimNode, SimLink>(this.nodes)
       .force('link', this.link)
-      .force(
-        'charge',
-        forceManyBody<SimNode>()
-          .strength(LAYOUT.charge)
-          .distanceMax(LAYOUT.chargeMaxDistance)
-          .theta(0.9),
-      )
+      .force('charge', this.charge)
       .force('collide', this.collide)
       // Gentle gravity (rather than forceCenter) keeps disconnected pieces, like the unreached target, in view.
       .force('x', forceX<SimNode>(0).strength(LAYOUT.gravity))
@@ -168,10 +168,11 @@ export class GraphSimulation {
     let y: number;
     if (isTarget && !parent) {
       // Show the goal as a distant beacon.
-      x = Math.cos(angle) * LAYOUT.targetSpawnDistance;
-      y = Math.sin(angle) * LAYOUT.targetSpawnDistance;
+      x = Math.cos(angle) * LAYOUT.targetSpawnDistance * this.nodeScale;
+      y = Math.sin(angle) * LAYOUT.targetSpawnDistance * this.nodeScale;
     } else if (parent) {
-      const r = LAYOUT.spawnMin + this.rng() * (LAYOUT.spawnMax - LAYOUT.spawnMin);
+      const r =
+        (LAYOUT.spawnMin + this.rng() * (LAYOUT.spawnMax - LAYOUT.spawnMin)) * this.nodeScale;
       x = parent.x + Math.cos(angle) * r;
       y = parent.y + Math.sin(angle) * r;
     } else {
@@ -184,16 +185,33 @@ export class GraphSimulation {
   }
 
   /**
-   * Make room for bigger nodes: the collision radius grows with the node scale so enlarged
-   * circles push apart instead of piling up. Shrinking nodes keep the default spacing, which
-   * leaves the layout alone. Only re-flows the graph when the spacing actually changes.
+   * Stretch the whole layout with the node scale, so edges get longer (or shorter) along with the
+   * nodes instead of disappearing under them. Every length is multiplied by `scale`: link
+   * length, collision radius, repulsion range and where new nodes are born. Repulsion strength
+   * grows with the square of it so the forces stay in the same balance and the graph keeps its
+   * shape. Existing positions are scaled too (about the origin), so the change is immediate and
+   * the layout only has to settle a little.
    */
   setNodeScale(scale: number): void {
-    const radius = LAYOUT.collideRadius * Math.max(1, scale);
-    if (radius === this.collideRadius) return;
-    this.collideRadius = radius;
-    this.collide.radius(radius);
-    this.reheat(LAYOUT.alphaOnChange);
+    if (scale === this.nodeScale) return;
+    const ratio = scale / this.nodeScale;
+    this.nodeScale = scale;
+
+    for (const n of this.nodes) {
+      n.x *= ratio;
+      n.y *= ratio;
+      if (n.vx != null) n.vx *= ratio;
+      if (n.vy != null) n.vy *= ratio;
+      if (n.fx != null) n.fx *= ratio;
+      if (n.fy != null) n.fy *= ratio;
+    }
+
+    this.link.distance(LAYOUT.linkDistance * scale);
+    this.charge
+      .strength(LAYOUT.charge * scale * scale)
+      .distanceMax(LAYOUT.chargeMaxDistance * scale);
+    this.collide.radius(LAYOUT.collideRadius * scale);
+    this.reheat(0.2);
   }
 
   reheat(alpha: number): void {
