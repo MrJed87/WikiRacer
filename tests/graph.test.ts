@@ -316,6 +316,72 @@ describe('GraphSimulation', () => {
     expect(sim.nodeById('StartA')).toBeUndefined();
   });
 
+  describe('replay stepping (a different graph object each step)', () => {
+    const log = () => {
+      seq = 0;
+      return [started(), step('a', 'Start', 'X'), step('a', 'X', 'Y'), step('a', 'Y', 'Z')];
+    };
+
+    it('keeps existing nodes where they are when stepping forward', () => {
+      const events = log();
+      const sim = new GraphSimulation(1);
+      sim.sync(buildGraph(events.slice(0, 2)));
+      sim.step(300);
+      const before = ['Start', 'Target', 'X'].map((id) => ({ ...sim.nodeById(id)! }));
+      expect(sim.active).toBe(false);
+
+      // A fresh graph object for the next step, exactly as the replay controller supplies.
+      expect(sim.sync(buildGraph(events.slice(0, 3)))).toBe(true);
+      expect(sim.nodes.map((n) => n.id).sort()).toEqual(['Start', 'Target', 'X', 'Y']);
+      // The new node is born beside its parent, and nothing else was teleported.
+      const x = sim.nodeById('X')!;
+      const y = sim.nodeById('Y')!;
+      expect(Math.hypot(y.x - x.x, y.y - x.y)).toBeLessThanOrEqual(LAYOUT.spawnMax + 1);
+      for (const b of before) {
+        expect(sim.nodeById(b.id)).toMatchObject({ x: b.x, y: b.y });
+      }
+    });
+
+    it('keeps ticking when handed an identical graph object (an event that changes nothing visual)', () => {
+      const events = log();
+      const sim = new GraphSimulation(1);
+      sim.sync(buildGraph(events));
+      sim.step(5);
+      expect(sim.sync(buildGraph(events))).toBe(false);
+      expect(() => sim.step(5)).not.toThrow();
+      expect(sim.nodes.every((n) => typeof n.x === 'number' && !Number.isNaN(n.x))).toBe(true);
+    });
+
+    it('removes only the latest nodes and links when stepping back', () => {
+      const events = log();
+      const sim = new GraphSimulation(1);
+      sim.sync(buildGraph(events));
+      sim.step(300);
+      const start = { ...sim.nodeById('Start')! };
+
+      expect(sim.sync(buildGraph(events.slice(0, 3)))).toBe(true);
+      expect(sim.nodes.map((n) => n.id).sort()).toEqual(['Start', 'Target', 'X', 'Y']);
+      expect(sim.nodeById('Z')).toBeUndefined();
+      expect(sim.nodeById('Start')).toMatchObject({ x: start.x, y: start.y });
+    });
+
+    it('drops a link that disappears even when both of its nodes remain', () => {
+      seq = 0;
+      const events = [
+        started(),
+        step('a', 'Start', 'X'),
+        step('a', 'X', 'Y'),
+        step('a', 'Y', 'Start'), // a new link between two articles already visited
+      ];
+      const sim = new GraphSimulation(1);
+      sim.sync(buildGraph(events));
+      const linkCount = () => (sim as unknown as { links: unknown[] }).links.length;
+      const full = linkCount();
+      sim.sync(buildGraph(events.slice(0, 3)));
+      expect(linkCount()).toBeLessThan(full);
+    });
+  });
+
   it('pins and releases nodes', () => {
     const g = createGraph();
     const sim = new GraphSimulation(1);

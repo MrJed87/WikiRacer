@@ -91,53 +91,72 @@ export class GraphSimulation {
     return this.byId.get(id);
   }
 
-  /** Re-sync with the model if it changed. Returns whether anything was added. */
+  /**
+   * Re-sync with the model if it changed. Returns whether anything was added.
+   *
+   * The layout is diffed against the model rather than rebuilt, so nodes that survive keep their
+   * positions. That matters for replays, which hand over a different (cached) graph object for
+   * every step and scrub both ways: stepping forward only adds nodes next to their parents, and
+   * stepping back only removes the latest ones, instead of re-scattering the whole graph.
+   */
   sync(model: GraphModel): boolean {
     const isNewInstance = this.lastModel !== null && this.lastModel !== model;
     if (!isNewInstance && model.version === this.seenVersion) return false;
 
-    // A new race or replay scrub resets the graph; start over rather than diff if node set changed
-    const needsReset =
-      isNewInstance ||
-      this.seenVersion > model.version ||
-      (this.nodes.length > 0 &&
-        (model.nodes.size < this.nodes.length || this.nodes.some((n) => !model.nodes.has(n.id))));
-    if (needsReset) this.reset();
+    // Drop nodes the model no longer has (a new race, or a replay scrubbed backwards).
+    let removed = false;
+    let kept = 0;
+    for (const node of this.nodes) {
+      if (model.nodes.has(node.id)) {
+        this.nodes[kept++] = node;
+      } else {
+        this.byId.delete(node.id);
+        removed = true;
+      }
+    }
+    this.nodes.length = kept;
 
     this.lastModel = model;
     this.seenVersion = model.version;
 
-    let changed = false;
+    let changed = removed;
     for (const node of model.nodes.values()) {
       if (this.byId.has(node.id)) continue;
       this.addNode(node.id, node.parent, node.isTarget);
       changed = true;
     }
+
+    // Links are cheap to rebuild and can disappear without any node disappearing (an edge
+    // between two articles that were both already visited), so derive them from the model.
+    const keys = new Set<string>();
+    const links: SimLink[] = [];
     for (const edge of model.edges.values()) {
       if (edge.from === edge.to) continue;
       const key =
         edge.from < edge.to ? `${edge.from}\u0000${edge.to}` : `${edge.to}\u0000${edge.from}`;
-      if (this.linkKeys.has(key)) continue;
-      const a = this.byId.get(edge.from);
-      const b = this.byId.get(edge.to);
-      if (!a || !b) continue;
-      this.linkKeys.add(key);
-      this.links.push({ source: a.id, target: b.id });
+      if (keys.has(key)) continue;
+      if (!this.byId.has(edge.from) || !this.byId.has(edge.to)) continue;
+      keys.add(key);
+      links.push({ source: edge.from, target: edge.to });
+    }
+    const linksChanged =
+      keys.size !== this.linkKeys.size || [...keys].some((k) => !this.linkKeys.has(k));
+    if (linksChanged) {
+      // Only swap the link objects when the set really changed: d3 resolves their ids to node
+      // objects when they are handed over, so fresh unresolved links must always be re-supplied.
+      this.linkKeys.clear();
+      for (const k of keys) this.linkKeys.add(k);
+      this.links.length = 0;
+      this.links.push(...links);
       changed = true;
     }
-    if (changed || needsReset) {
+
+    if (changed) {
       this.sim.nodes(this.nodes);
       this.link.links(this.links);
       this.reheat(LAYOUT.alphaOnChange);
     }
     return changed;
-  }
-
-  private reset(): void {
-    this.nodes.length = 0;
-    this.links.length = 0;
-    this.byId.clear();
-    this.linkKeys.clear();
   }
 
   private addNode(id: string, parentId: string | null, isTarget: boolean): void {
