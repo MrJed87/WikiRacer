@@ -1,0 +1,671 @@
+{
+  "app": "Wikipedia Graph Race",
+  "version": 1,
+  "exportedAt": "2026-10-23T09:16:43.922Z",
+  "config": {
+    "start": "Regan Steigleder",
+    "target": "Train",
+    "targetSummary": "A train (from Old French trahiner, from Latin trahere, \"to pull, to draw\") is a series of connected vehicles that run along a railway track and transport people or freight. Trains are typically pulled or pushed by locomotives (often known simply as \"engines\"), though some are self-propelled, such as multiple units or railcars. Passengers and cargo are carried in railroad cars, also known as wagons or carriages. Trains are designed to a certain gauge, or distance between rails. Most trains operate on steel tracks with steel wheels, the low friction of which makes them more efficient than other…",
+    "maxSteps": 30,
+    "linkCap": 150,
+    "temperature": 0.2,
+    "circlingThreshold": 3,
+    "maxVisitsPerPage": 3,
+    "reasoningEffort": "low",
+    "maxOutputTokens": 4000,
+    "budgetUsd": 0.5,
+    "budgetTokens": 400000,
+    "stepDelayMs": 0,
+    "stopOnFirstArrival": false,
+    "lockstep": true,
+    "promptVersion": 1
+  },
+  "racers": [
+    {
+      "id": "openai/gpt-6.1-sol",
+      "label": "OpenAI: GPT-6.1 Sol",
+      "colorIndex": 0
+    },
+    {
+      "id": "google/gemini-4-argon",
+      "label": "Google: Gemini 4 Argon",
+      "colorIndex": 1
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0813",
+      "label": "DeepSeek: DeepSeek V4 Pro 0813",
+      "colorIndex": 2
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "label": "MoonshotAI: Kimi K3",
+      "colorIndex": 3
+    },
+    {
+      "id": "~anthropic/claude-opus-latest",
+      "label": "Anthropic: Claude Opus Latest",
+      "colorIndex": 4
+    }
+  ],
+  "events": [
+    {
+      "type": "RaceStarted",
+      "config": {
+        "start": "Regan Steigleder",
+        "target": "Train",
+        "targetSummary": "A train (from Old French trahiner, from Latin trahere, \"to pull, to draw\") is a series of connected vehicles that run along a railway track and transport people or freight. Trains are typically pulled or pushed by locomotives (often known simply as \"engines\"), though some are self-propelled, such as multiple units or railcars. Passengers and cargo are carried in railroad cars, also known as wagons or carriages. Trains are designed to a certain gauge, or distance between rails. Most trains operate on steel tracks with steel wheels, the low friction of which makes them more efficient than other…",
+        "maxSteps": 30,
+        "linkCap": 150,
+        "temperature": 0.2,
+        "circlingThreshold": 3,
+        "maxVisitsPerPage": 3,
+        "reasoningEffort": "low",
+        "maxOutputTokens": 4000,
+        "budgetUsd": 0.5,
+        "budgetTokens": 400000,
+        "stepDelayMs": 0,
+        "stopOnFirstArrival": false,
+        "lockstep": true,
+        "promptVersion": 1
+      },
+      "racers": [
+        {
+          "id": "openai/gpt-6.1-sol",
+          "label": "OpenAI: GPT-6.1 Sol",
+          "colorIndex": 0
+        },
+        {
+          "id": "google/gemini-4-argon",
+          "label": "Google: Gemini 4 Argon",
+          "colorIndex": 1
+        },
+        {
+          "id": "deepseek/deepseek-v4-pro-0813",
+          "label": "DeepSeek: DeepSeek V4 Pro 0813",
+          "colorIndex": 2
+        },
+        {
+          "id": "moonshotai/kimi-k3",
+          "label": "MoonshotAI: Kimi K3",
+          "colorIndex": 3
+        },
+        {
+          "id": "~anthropic/claude-opus-latest",
+          "label": "Anthropic: Claude Opus Latest",
+          "colorIndex": 4
+        }
+      ],
+      "startedAtEpochMs": 1792746945347,
+      "seq": 0,
+      "t": 0
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "moonshotai/kimi-k3",
+      "step": 1,
+      "from": "Regan Steigleder",
+      "to": "Iowa City, Iowa",
+      "index": 9,
+      "usage": {
+        "promptTokens": 1067,
+        "completionTokens": 69,
+        "totalTokens": 1136,
+        "costUsd": 0.001347706
+      },
+      "latencyMs": 1080,
+      "reason": "A city article is a broad hub likely to link to transport and rail topics.",
+      "seq": 1,
+      "t": 3051
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 1,
+      "from": "Regan Steigleder",
+      "to": "Iowa City, Iowa",
+      "index": 9,
+      "usage": {
+        "promptTokens": 1871,
+        "completionTokens": 67,
+        "totalTokens": 1938,
+        "costUsd": 0.01103
+      },
+      "latencyMs": 2000,
+      "reason": "City article likely links to rail transport/trains.",
+      "seq": 2,
+      "t": 3053
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4-pro-0813",
+      "step": 1,
+      "from": "Regan Steigleder",
+      "to": "Phoenix, Arizona",
+      "index": 12,
+      "usage": {
+        "promptTokens": 1182,
+        "completionTokens": 247,
+        "totalTokens": 1429,
+        "costUsd": 0.00139897
+      },
+      "latencyMs": 1685,
+      "reason": "Phoenix, Arizona is a city article likely to have a transportation section linking to rail/train topics.",
+      "seq": 3,
+      "t": 5720
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-6.1-sol",
+      "step": 1,
+      "from": "Regan Steigleder",
+      "to": "Phoenix, Arizona",
+      "index": 12,
+      "usage": {
+        "promptTokens": 922,
+        "completionTokens": 37,
+        "totalTokens": 959,
+        "costUsd": 0.002214
+      },
+      "latencyMs": 2239,
+      "reason": "Phoenix has extensive rail transportation links that can lead toward trains.",
+      "seq": 4,
+      "t": 5722
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "google/gemini-4-argon",
+      "step": 1,
+      "from": "Regan Steigleder",
+      "to": "Phoenix, Arizona",
+      "index": 12,
+      "usage": {
+        "promptTokens": 1054,
+        "completionTokens": 47,
+        "totalTokens": 1101,
+        "costUsd": 0.002578
+      },
+      "latencyMs": 3644,
+      "reason": "Phoenix, Arizona is a major city article that will have a transportation section with links to rail or trains.",
+      "seq": 5,
+      "t": 5723
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "moonshotai/kimi-k3",
+      "step": 2,
+      "from": "Iowa City, Iowa",
+      "to": "Iowa",
+      "index": 39,
+      "usage": {
+        "promptTokens": 1820,
+        "completionTokens": 69,
+        "totalTokens": 1889,
+        "costUsd": 0.00151924
+      },
+      "latencyMs": 1089,
+      "reason": "Iowa state article likely links to transportation/rail topics that lead toward Train.",
+      "seq": 6,
+      "t": 9179
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4-pro-0813",
+      "step": 2,
+      "from": "Phoenix, Arizona",
+      "to": "Santa Fe, Prescott and Phoenix Railway",
+      "index": 96,
+      "usage": {
+        "promptTokens": 1896,
+        "completionTokens": 131,
+        "totalTokens": 2027,
+        "costUsd": 0.00110366
+      },
+      "latencyMs": 1256,
+      "reason": "Railway article likely links to train/rail transport topics.",
+      "seq": 7,
+      "t": 10778
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-6.1-sol",
+      "step": 2,
+      "from": "Phoenix, Arizona",
+      "to": "Santa Fe, Prescott and Phoenix Railway",
+      "index": 96,
+      "usage": {
+        "promptTokens": 1628,
+        "completionTokens": 43,
+        "totalTokens": 1671,
+        "costUsd": 0.0008436
+      },
+      "latencyMs": 2655,
+      "reason": "This railway article should provide a direct link to trains or a closely related rail transport page.",
+      "seq": 8,
+      "t": 10780
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "google/gemini-4-argon",
+      "step": 2,
+      "from": "Phoenix, Arizona",
+      "to": "Santa Fe, Prescott and Phoenix Railway",
+      "index": 96,
+      "usage": {
+        "promptTokens": 1882,
+        "completionTokens": 41,
+        "totalTokens": 1923,
+        "costUsd": 0.004174
+      },
+      "latencyMs": 3356,
+      "reason": "Navigate to a railway article which should link directly to Train or Rail transport.",
+      "seq": 9,
+      "t": 10781
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 2,
+      "from": "Iowa City, Iowa",
+      "to": "Cedar Rapids, Iowa",
+      "index": 34,
+      "usage": {
+        "promptTokens": 3031,
+        "completionTokens": 79,
+        "totalTokens": 3110,
+        "costUsd": 0.01713
+      },
+      "latencyMs": 2179,
+      "reason": "Cedar Rapids page likely mentions rail/trains; or city transport links.",
+      "seq": 10,
+      "t": 13064
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "moonshotai/kimi-k3",
+      "step": 3,
+      "from": "Iowa",
+      "to": "United States",
+      "index": 8,
+      "usage": {
+        "promptTokens": 1891,
+        "completionTokens": 71,
+        "totalTokens": 1962,
+        "costUsd": 0.001567498
+      },
+      "latencyMs": 1252,
+      "reason": "United States is a broad hub likely to link to transportation/rail topics leading to Train.",
+      "seq": 11,
+      "t": 17360
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4-pro-0813",
+      "step": 3,
+      "from": "Santa Fe, Prescott and Phoenix Railway",
+      "to": "Steam locomotive",
+      "index": 32,
+      "usage": {
+        "promptTokens": 1178,
+        "completionTokens": 338,
+        "totalTokens": 1516,
+        "costUsd": 0.00178913
+      },
+      "latencyMs": 1564,
+      "reason": "Steam locomotives are a core component of trains and likely link directly to the Train article.",
+      "seq": 12,
+      "t": 19965
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-6.1-sol",
+      "step": 3,
+      "from": "Santa Fe, Prescott and Phoenix Railway",
+      "to": "Steam locomotive",
+      "index": 32,
+      "usage": {
+        "promptTokens": 928,
+        "completionTokens": 39,
+        "totalTokens": 967,
+        "costUsd": 0.002246
+      },
+      "latencyMs": 2180,
+      "reason": "Steam locomotives should link directly to trains, which they pull.",
+      "seq": 13,
+      "t": 19967
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "google/gemini-4-argon",
+      "step": 3,
+      "from": "Santa Fe, Prescott and Phoenix Railway",
+      "to": "Steam locomotive",
+      "index": 32,
+      "usage": {
+        "promptTokens": 1019,
+        "completionTokens": 46,
+        "totalTokens": 1065,
+        "costUsd": 0.002498
+      },
+      "latencyMs": 4269,
+      "reason": "\"Steam locomotives\" is a core railway vehicle concept that will almost certainly link directly to \"Train\".",
+      "seq": 14,
+      "t": 19968
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 3,
+      "from": "Cedar Rapids, Iowa",
+      "to": "Interstate 380 (Iowa)",
+      "index": 43,
+      "usage": {
+        "promptTokens": 3104,
+        "completionTokens": 65,
+        "totalTokens": 3169,
+        "costUsd": 0.017145
+      },
+      "latencyMs": 2226,
+      "reason": "Transport article likely links to rail/train",
+      "seq": 15,
+      "t": 21291
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "moonshotai/kimi-k3",
+      "step": 4,
+      "from": "United States",
+      "to": "Economy of the United States",
+      "index": 142,
+      "usage": {
+        "promptTokens": 1821,
+        "completionTokens": 68,
+        "totalTokens": 1889,
+        "costUsd": 0.001503478
+      },
+      "latencyMs": 1819,
+      "reason": "The economy article likely links to transportation and rail, which lead toward Train.",
+      "seq": 16,
+      "t": 26076
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 4,
+      "from": "Interstate 380 (Iowa)",
+      "to": "Waterloo, Iowa",
+      "index": 13,
+      "usage": {
+        "promptTokens": 2827,
+        "completionTokens": 66,
+        "totalTokens": 2893,
+        "costUsd": 0.015785
+      },
+      "latencyMs": 2015,
+      "reason": "City article likely mentions rail/train service.",
+      "seq": 17,
+      "t": 28049
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-6.1-sol",
+      "step": 4,
+      "from": "Steam locomotive",
+      "to": "Locomotive",
+      "index": 10,
+      "usage": {
+        "promptTokens": 1613,
+        "completionTokens": 38,
+        "totalTokens": 1651,
+        "costUsd": 0.0007921
+      },
+      "latencyMs": 2132,
+      "reason": "Locomotive should link directly to Train in its introductory definition.",
+      "seq": 18,
+      "t": 29755
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "google/gemini-4-argon",
+      "step": 4,
+      "from": "Steam locomotive",
+      "to": "Locomotive",
+      "index": 10,
+      "usage": {
+        "promptTokens": 1857,
+        "completionTokens": 44,
+        "totalTokens": 1901,
+        "costUsd": 0.004154
+      },
+      "latencyMs": 4788,
+      "reason": "Locomotive is the general category that directly defines and links to Train in its lead paragraph.",
+      "seq": 19,
+      "t": 29757
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4-pro-0813",
+      "step": 4,
+      "from": "Steam locomotive",
+      "to": "Rail transport",
+      "index": 50,
+      "usage": {
+        "promptTokens": 1882,
+        "completionTokens": 412,
+        "totalTokens": 2294,
+        "costUsd": 0.00230797
+      },
+      "latencyMs": 2906,
+      "reason": "Rail transport is a broad hub article that almost certainly links to Train.",
+      "seq": 20,
+      "t": 32177
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4-pro-0813",
+      "step": 5,
+      "from": "Rail transport",
+      "to": "Train",
+      "index": 15,
+      "usage": {
+        "promptTokens": 1775,
+        "completionTokens": 90,
+        "totalTokens": 1865,
+        "costUsd": 0.000892363
+      },
+      "latencyMs": 817,
+      "reason": "The target article \"Train\" is directly listed as a link.",
+      "seq": 21,
+      "t": 32998
+    },
+    {
+      "type": "Arrived",
+      "racerId": "deepseek/deepseek-v4-pro-0813",
+      "steps": 5,
+      "title": "Train",
+      "seq": 22,
+      "t": 32999
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-6.1-sol",
+      "step": 5,
+      "from": "Locomotive",
+      "to": "Train",
+      "index": 8,
+      "usage": {
+        "promptTokens": 1540,
+        "completionTokens": 36,
+        "totalTokens": 1576,
+        "costUsd": 0.004144
+      },
+      "latencyMs": 2249,
+      "reason": "Train is the target article and is directly linked here.",
+      "seq": 23,
+      "t": 34430
+    },
+    {
+      "type": "Arrived",
+      "racerId": "openai/gpt-6.1-sol",
+      "steps": 5,
+      "title": "Train",
+      "seq": 24,
+      "t": 34433
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "google/gemini-4-argon",
+      "step": 5,
+      "from": "Locomotive",
+      "to": "Train",
+      "index": 8,
+      "usage": {
+        "promptTokens": 1763,
+        "completionTokens": 33,
+        "totalTokens": 1796,
+        "costUsd": 0.003856
+      },
+      "latencyMs": 4127,
+      "reason": "\"Train\" is the target article.",
+      "seq": 25,
+      "t": 36308
+    },
+    {
+      "type": "Arrived",
+      "racerId": "google/gemini-4-argon",
+      "steps": 5,
+      "title": "Train",
+      "seq": 26,
+      "t": 36309
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "moonshotai/kimi-k3",
+      "step": 5,
+      "from": "Economy of the United States",
+      "to": "Transport",
+      "index": 107,
+      "usage": {
+        "promptTokens": 1724,
+        "completionTokens": 67,
+        "totalTokens": 1791,
+        "costUsd": 0.001482312
+      },
+      "latencyMs": 1091,
+      "reason": "Transportation infrastructure is the most direct stepping stone toward railways and trains.",
+      "seq": 27,
+      "t": 38753
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 5,
+      "from": "Waterloo, Iowa",
+      "to": "Illinois Central Railroad",
+      "index": 44,
+      "usage": {
+        "promptTokens": 3154,
+        "completionTokens": 64,
+        "totalTokens": 3218,
+        "costUsd": 0.01737
+      },
+      "latencyMs": 1962,
+      "reason": "Railroad article likely links to train.",
+      "seq": 28,
+      "t": 40908
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "moonshotai/kimi-k3",
+      "step": 6,
+      "from": "Transport",
+      "to": "Train",
+      "index": 36,
+      "usage": {
+        "promptTokens": 1535,
+        "completionTokens": 71,
+        "totalTokens": 1606,
+        "costUsd": 0.00150133
+      },
+      "latencyMs": 1215,
+      "reason": "The Train article is directly linked from Transport, so this reaches the target in one click.",
+      "seq": 29,
+      "t": 42125
+    },
+    {
+      "type": "Arrived",
+      "racerId": "moonshotai/kimi-k3",
+      "steps": 6,
+      "title": "Train",
+      "seq": 30,
+      "t": 42127
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 6,
+      "from": "Illinois Central Railroad",
+      "to": "City of New Orleans (train)",
+      "index": 77,
+      "usage": {
+        "promptTokens": 3252,
+        "completionTokens": 61,
+        "totalTokens": 3313,
+        "costUsd": 0.017785
+      },
+      "latencyMs": 1806,
+      "reason": "A train article links to Train.",
+      "seq": 31,
+      "t": 45757
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 7,
+      "from": "City of New Orleans (train)",
+      "to": "Passenger train",
+      "index": 69,
+      "usage": {
+        "promptTokens": 3162,
+        "completionTokens": 65,
+        "totalTokens": 3227,
+        "costUsd": 0.017435
+      },
+      "latencyMs": 1951,
+      "reason": "Passenger train likely links to Train.",
+      "seq": 32,
+      "t": 49426
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~anthropic/claude-opus-latest",
+      "step": 8,
+      "from": "Passenger train",
+      "to": "Train",
+      "index": 14,
+      "usage": {
+        "promptTokens": 2675,
+        "completionTokens": 58,
+        "totalTokens": 2733,
+        "costUsd": 0.014825
+      },
+      "latencyMs": 1965,
+      "reason": "Direct target.",
+      "seq": 33,
+      "t": 51394
+    },
+    {
+      "type": "Arrived",
+      "racerId": "~anthropic/claude-opus-latest",
+      "steps": 8,
+      "title": "Train",
+      "seq": 34,
+      "t": 51395
+    },
+    {
+      "type": "RaceEnded",
+      "reason": "all-done",
+      "seq": 35,
+      "t": 51397
+    }
+  ]
+}

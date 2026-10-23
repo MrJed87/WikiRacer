@@ -1,0 +1,866 @@
+{
+  "app": "Wikipedia Graph Race",
+  "version": 1,
+  "exportedAt": "2026-10-22T06:57:21.422Z",
+  "config": {
+    "start": "Daydreaming (Massive Attack song)",
+    "target": "Nigeria",
+    "targetSummary": "Nigeria, officially the Federal Republic of Nigeria, is a country in West Africa between the Sahel to the north and the Gulf of Guinea in the Atlantic Ocean to the south. It covers an area of 923,769 square kilometres (356,669 mi2). With a population of more than 242 million, it is the most populous country in Africa, and the world's sixth-most populous country. Nigeria borders Niger in the north, Chad in the northeast, Cameroon in the east, and Benin in the west. Nigeria is a federal republic comprising 36 states and the Federal Capital Territory, where its capital, Abuja, is located. The…",
+    "maxSteps": 30,
+    "linkCap": 150,
+    "temperature": 0.2,
+    "circlingThreshold": 3,
+    "maxVisitsPerPage": 3,
+    "reasoningEffort": "low",
+    "maxOutputTokens": 4000,
+    "budgetUsd": 0.5,
+    "budgetTokens": 400000,
+    "stepDelayMs": 0,
+    "stopOnFirstArrival": false,
+    "lockstep": true,
+    "promptVersion": 1
+  },
+  "racers": [
+    {
+      "id": "mistralai/mistral-nemo",
+      "label": "Mistral: Mistral Nemo",
+      "colorIndex": 0
+    },
+    {
+      "id": "~z-ai/glm-flash-latest",
+      "label": "Z.ai: GLM Flash Latest",
+      "colorIndex": 1
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "label": "inclusionAI: Ling 3.0 Flash",
+      "colorIndex": 2
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "label": "OpenAI: gpt-oss-20b",
+      "colorIndex": 3
+    }
+  ],
+  "events": [
+    {
+      "type": "RaceStarted",
+      "config": {
+        "start": "Daydreaming (Massive Attack song)",
+        "target": "Nigeria",
+        "targetSummary": "Nigeria, officially the Federal Republic of Nigeria, is a country in West Africa between the Sahel to the north and the Gulf of Guinea in the Atlantic Ocean to the south. It covers an area of 923,769 square kilometres (356,669 mi2). With a population of more than 242 million, it is the most populous country in Africa, and the world's sixth-most populous country. Nigeria borders Niger in the north, Chad in the northeast, Cameroon in the east, and Benin in the west. Nigeria is a federal republic comprising 36 states and the Federal Capital Territory, where its capital, Abuja, is located. The…",
+        "maxSteps": 30,
+        "linkCap": 150,
+        "temperature": 0.2,
+        "circlingThreshold": 3,
+        "maxVisitsPerPage": 3,
+        "reasoningEffort": "low",
+        "maxOutputTokens": 4000,
+        "budgetUsd": 0.5,
+        "budgetTokens": 400000,
+        "stepDelayMs": 0,
+        "stopOnFirstArrival": false,
+        "lockstep": true,
+        "promptVersion": 1
+      },
+      "racers": [
+        {
+          "id": "mistralai/mistral-nemo",
+          "label": "Mistral: Mistral Nemo",
+          "colorIndex": 0
+        },
+        {
+          "id": "~z-ai/glm-flash-latest",
+          "label": "Z.ai: GLM Flash Latest",
+          "colorIndex": 1
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "label": "inclusionAI: Ling 3.0 Flash",
+          "colorIndex": 2
+        },
+        {
+          "id": "openai/gpt-oss-20b",
+          "label": "OpenAI: gpt-oss-20b",
+          "colorIndex": 3
+        }
+      ],
+      "startedAtEpochMs": 1792651968750,
+      "seq": 0,
+      "t": 0
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-oss-20b",
+      "step": 1,
+      "from": "Daydreaming (Massive Attack song)",
+      "to": "Massive Attack",
+      "index": 2,
+      "usage": {
+        "promptTokens": 761,
+        "completionTokens": 152,
+        "totalTokens": 913,
+        "costUsd": 0.00004259
+      },
+      "latencyMs": 1537,
+      "reason": "Massive Attack leads to Trip hop, a genre that connects to African music and Nigeria.",
+      "seq": 1,
+      "t": 3689
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 1,
+      "from": "Daydreaming (Massive Attack song)",
+      "to": "Massive Attack",
+      "index": 2,
+      "usage": {
+        "promptTokens": 778,
+        "completionTokens": 36,
+        "totalTokens": 814,
+        "costUsd": 0.000023642
+      },
+      "latencyMs": 3154,
+      "reason": "Massive Attack is a British band, so choosing them might lead to a more general article that could link to Nigeria.",
+      "seq": 2,
+      "t": 3693
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 1,
+      "from": "Daydreaming (Massive Attack song)",
+      "to": "Massive Attack",
+      "index": 2,
+      "usage": {
+        "promptTokens": 953,
+        "completionTokens": 712,
+        "totalTokens": 1665,
+        "costUsd": 0.000064869
+      },
+      "latencyMs": 5064,
+      "reason": "Massive Attack is a well-known band with broad connections; exploring their article may lead to geographic or cultural topics that connect to Nigeria.",
+      "seq": 3,
+      "t": 5079
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 1,
+      "from": "Daydreaming (Massive Attack song)",
+      "to": "Shara Nelson",
+      "index": 3,
+      "usage": {
+        "promptTokens": 826,
+        "completionTokens": 50,
+        "totalTokens": 876,
+        "costUsd": 0.000071124
+      },
+      "latencyMs": 1659,
+      "reason": "Shara Nelson is British; unlikely path to Nigeria. Better: Wally Badarou is from Benin... actually he's Beninese, which borders Nigeria.",
+      "seq": 4,
+      "t": 5728
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 2,
+      "from": "Shara Nelson",
+      "to": "Bristol",
+      "index": 10,
+      "usage": {
+        "promptTokens": 991,
+        "completionTokens": 78,
+        "totalTokens": 1069,
+        "costUsd": 0.000088934
+      },
+      "latencyMs": 1700,
+      "reason": "Bristol's article likely covers demographics/links including Nigeria via its African community.",
+      "seq": 5,
+      "t": 10713
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-oss-20b",
+      "step": 2,
+      "from": "Massive Attack",
+      "to": "Bristol",
+      "index": 4,
+      "usage": {
+        "promptTokens": 1694,
+        "completionTokens": 235,
+        "totalTokens": 1929,
+        "costUsd": 0.00008137
+      },
+      "latencyMs": 2345,
+      "reason": "Bristol is a city in the UK, a good stepping stone to reach Nigeria via broader geographic links.",
+      "seq": 6,
+      "t": 10717
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 2,
+      "from": "Massive Attack",
+      "to": "Bristol",
+      "index": 4,
+      "usage": {
+        "promptTokens": 1919,
+        "completionTokens": 31,
+        "totalTokens": 1950,
+        "costUsd": 0.000056581
+      },
+      "latencyMs": 2753,
+      "reason": "Bristol is a large city in the UK, which might have links to other countries.",
+      "seq": 7,
+      "t": 10720
+    },
+    {
+      "type": "InvalidChoice",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 1,
+      "at": "Massive Attack",
+      "problem": "The reply hit the 4000-token limit before giving an answer (it ran out while thinking).",
+      "raw": "",
+      "willRetry": true,
+      "wasted": false,
+      "usage": {
+        "promptTokens": 2125,
+        "completionTokens": 4000,
+        "totalTokens": 6125,
+        "costUsd": 0.000296625
+      },
+      "latencyMs": 21463,
+      "seq": 8,
+      "t": 27197
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 2,
+      "from": "Massive Attack",
+      "to": "Bristol",
+      "index": 4,
+      "usage": {
+        "promptTokens": 2171,
+        "completionTokens": 2041,
+        "totalTokens": 4212,
+        "costUsd": 0.0001644972
+      },
+      "latencyMs": 12283,
+      "reason": "Bristol is a major city hub article that Massive Attack is closely associated with, and its extensive Wikipedia page likely contains diverse links including connections to Nigeria through geography, history, or music topics.",
+      "seq": 9,
+      "t": 39486
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-oss-20b",
+      "step": 3,
+      "from": "Bristol",
+      "to": "United Kingdom",
+      "index": 16,
+      "usage": {
+        "promptTokens": 1651,
+        "completionTokens": 70,
+        "totalTokens": 1721,
+        "costUsd": 0.00005863
+      },
+      "latencyMs": 1094,
+      "reason": "United Kingdom links to Nigeria as a former British colony",
+      "seq": 10,
+      "t": 43839
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 3,
+      "from": "Bristol",
+      "to": "United Kingdom",
+      "index": 16,
+      "usage": {
+        "promptTokens": 1731,
+        "completionTokens": 57,
+        "totalTokens": 1788,
+        "costUsd": 0.000139494
+      },
+      "latencyMs": 1134,
+      "reason": "United Kingdom page likely links to Nigeria via Commonwealth or foreign relations.",
+      "seq": 11,
+      "t": 43841
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 3,
+      "from": "Bristol",
+      "to": "Countries of the United Kingdom",
+      "index": 17,
+      "usage": {
+        "promptTokens": 1866,
+        "completionTokens": 27,
+        "totalTokens": 1893,
+        "costUsd": 0.000054924
+      },
+      "latencyMs": 3364,
+      "reason": "South West England is a region of England that includes the target country.",
+      "seq": 12,
+      "t": 45642
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 3,
+      "from": "Bristol",
+      "to": "Bristol slave trade",
+      "index": 84,
+      "usage": {
+        "promptTokens": 2026,
+        "completionTokens": 476,
+        "totalTokens": 2502,
+        "costUsd": 0.0000628572
+      },
+      "latencyMs": 4225,
+      "reason": "Bristol was a major hub of the transatlantic slave trade, which directly connects to West Africa and Nigeria. This is the most likely path from Bristol to reach the Nigeria article.",
+      "seq": 13,
+      "t": 47150
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 4,
+      "from": "Bristol slave trade",
+      "to": "Nigeria",
+      "index": 30,
+      "usage": {
+        "promptTokens": 1195,
+        "completionTokens": 263,
+        "totalTokens": 1458,
+        "costUsd": 0.0000319872
+      },
+      "latencyMs": 2773,
+      "reason": "Nigeria is the target article and is directly linked on this page, making it the most efficient next step.",
+      "seq": 14,
+      "t": 49933
+    },
+    {
+      "type": "Arrived",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "steps": 4,
+      "title": "Nigeria",
+      "seq": 15,
+      "t": 49937
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 4,
+      "from": "United Kingdom",
+      "to": "List of countries that have gained independence from the United Kingdom",
+      "index": 139,
+      "usage": {
+        "promptTokens": 1807,
+        "completionTokens": 30,
+        "totalTokens": 1837,
+        "costUsd": 0.000139718
+      },
+      "latencyMs": 1006,
+      "reason": "List of countries that gained independence from the UK will include Nigeria.",
+      "seq": 16,
+      "t": 52293
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-oss-20b",
+      "step": 4,
+      "from": "United Kingdom",
+      "to": "Commonwealth of Nations",
+      "index": 137,
+      "usage": {
+        "promptTokens": 1740,
+        "completionTokens": 173,
+        "totalTokens": 1913,
+        "costUsd": 0.00007469
+      },
+      "latencyMs": 1742,
+      "reason": "Commonwealth of Nations includes Nigeria",
+      "seq": 17,
+      "t": 55087
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 4,
+      "from": "Countries of the United Kingdom",
+      "to": "Great Britain",
+      "index": 12,
+      "usage": {
+        "promptTokens": 1791,
+        "completionTokens": 15,
+        "totalTokens": 1806,
+        "costUsd": 0.000052389
+      },
+      "latencyMs": 2937,
+      "reason": "Go to Ireland to get closer to Nigeria.",
+      "seq": 18,
+      "t": 57578
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "openai/gpt-oss-20b",
+      "step": 5,
+      "from": "Commonwealth of Nations",
+      "to": "Nigeria",
+      "index": 39,
+      "usage": {
+        "promptTokens": 1537,
+        "completionTokens": 49,
+        "totalTokens": 1586,
+        "costUsd": 0.00005248
+      },
+      "latencyMs": 982,
+      "reason": "Direct link to target",
+      "seq": 19,
+      "t": 58563
+    },
+    {
+      "type": "Arrived",
+      "racerId": "openai/gpt-oss-20b",
+      "steps": 5,
+      "title": "Nigeria",
+      "seq": 20,
+      "t": 58564
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 5,
+      "from": "List of countries that have gained independence from the United Kingdom",
+      "to": "Nigeria",
+      "index": 81,
+      "usage": {
+        "promptTokens": 1685,
+        "completionTokens": 32,
+        "totalTokens": 1717,
+        "costUsd": 0.00013109
+      },
+      "latencyMs": 1106,
+      "reason": "Nigeria is directly listed as a country that gained independence from the UK.",
+      "seq": 21,
+      "t": 58686
+    },
+    {
+      "type": "Arrived",
+      "racerId": "~z-ai/glm-flash-latest",
+      "steps": 5,
+      "title": "Nigeria",
+      "seq": 22,
+      "t": 58687
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 5,
+      "from": "Great Britain",
+      "to": "United Kingdom",
+      "index": 14,
+      "usage": {
+        "promptTokens": 1802,
+        "completionTokens": 32,
+        "totalTokens": 1834,
+        "costUsd": 0.000053218
+      },
+      "latencyMs": 1564,
+      "reason": "Going to the main article about the United Kingdom might lead to more relevant links.",
+      "seq": 23,
+      "t": 59146
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 6,
+      "from": "United Kingdom",
+      "to": "England",
+      "index": 77,
+      "usage": {
+        "promptTokens": 1974,
+        "completionTokens": 35,
+        "totalTokens": 2009,
+        "costUsd": 0.000058296
+      },
+      "latencyMs": 3630,
+      "reason": "To get closer to the target country.",
+      "seq": 24,
+      "t": 65880
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 7,
+      "from": "England",
+      "to": "Wales",
+      "index": 62,
+      "usage": {
+        "promptTokens": 1831,
+        "completionTokens": 36,
+        "totalTokens": 1867,
+        "costUsd": 0.000054179
+      },
+      "latencyMs": 1539,
+      "reason": "To move towards the target country in Africa.",
+      "seq": 25,
+      "t": 70070
+    },
+    {
+      "type": "InvalidChoice",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 7,
+      "at": "Wales",
+      "problem": "No tool call and no JSON object was found in the reply.",
+      "raw": "  I'm sorry, I didn't receive a valid response. Please, call the choose_link tool with either the 1-based \"index\" of a link from the list, or \"back\": true to return to the previous page. Add a short \"reason\".",
+      "willRetry": true,
+      "wasted": false,
+      "usage": {
+        "promptTokens": 1932,
+        "completionTokens": 56,
+        "totalTokens": 1988,
+        "costUsd": 0.000057708
+      },
+      "latencyMs": 2593,
+      "seq": 26,
+      "t": 72665
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 8,
+      "from": "Wales",
+      "to": "England–Wales border",
+      "index": 74,
+      "usage": {
+        "promptTokens": 1968,
+        "completionTokens": 20,
+        "totalTokens": 1988,
+        "costUsd": 0.000057672
+      },
+      "latencyMs": 2553,
+      "reason": "To move towards the target country.",
+      "seq": 27,
+      "t": 77129
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 9,
+      "from": "England–Wales border",
+      "to": "United Kingdom",
+      "index": 8,
+      "usage": {
+        "promptTokens": 1861,
+        "completionTokens": 32,
+        "totalTokens": 1893,
+        "costUsd": 0.000054929
+      },
+      "latencyMs": 5669,
+      "reason": "Nigeria is a country in West Africa, so I'll try to move towards the African continent.",
+      "seq": 28,
+      "t": 82801
+    },
+    {
+      "type": "Revisited",
+      "racerId": "mistralai/mistral-nemo",
+      "title": "United Kingdom",
+      "visits": 2,
+      "seq": 29,
+      "t": 82804
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 10,
+      "from": "United Kingdom",
+      "to": "Continental Europe",
+      "index": 76,
+      "usage": {
+        "promptTokens": 2004,
+        "completionTokens": 35,
+        "totalTokens": 2039,
+        "costUsd": 0.000059166
+      },
+      "latencyMs": 3853,
+      "reason": "To move towards the target's region.",
+      "seq": 30,
+      "t": 87942
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 11,
+      "from": "Continental Europe",
+      "to": "European Union",
+      "index": 52,
+      "usage": {
+        "promptTokens": 1169,
+        "completionTokens": 27,
+        "totalTokens": 1196,
+        "costUsd": 0.000034711
+      },
+      "latencyMs": 2708,
+      "reason": "To reach the target, I need to go through the European Union.",
+      "seq": 31,
+      "t": 93740
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 12,
+      "from": "European Union",
+      "to": "Irish language",
+      "index": 12,
+      "usage": {
+        "promptTokens": 1825,
+        "completionTokens": 21,
+        "totalTokens": 1846,
+        "costUsd": 0.000053555
+      },
+      "latencyMs": 2265,
+      "reason": "It is a broad hub article that might link to other countries.",
+      "seq": 32,
+      "t": 98465
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 13,
+      "from": "Irish language",
+      "to": "Northern Ireland",
+      "index": 2,
+      "usage": {
+        "promptTokens": 1877,
+        "completionTokens": 25,
+        "totalTokens": 1902,
+        "costUsd": 0.000055183
+      },
+      "latencyMs": 3177,
+      "reason": "It's a country, and it's close to Nigeria geographically.",
+      "seq": 33,
+      "t": 104227
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 14,
+      "from": "Northern Ireland",
+      "to": "Ireland",
+      "index": 66,
+      "usage": {
+        "promptTokens": 2026,
+        "completionTokens": 39,
+        "totalTokens": 2065,
+        "costUsd": 0.000059924
+      },
+      "latencyMs": 2224,
+      "reason": "Nigeria is a country in West Africa, so I'm choosing 'Ireland' to move closer to the target.",
+      "seq": 34,
+      "t": 109032
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 15,
+      "from": "Ireland",
+      "to": "European Union",
+      "index": 68,
+      "usage": {
+        "promptTokens": 1826,
+        "completionTokens": 27,
+        "totalTokens": 1853,
+        "costUsd": 0.000053764
+      },
+      "latencyMs": 1767,
+      "reason": "To reach the target, I need to go through the European Union.",
+      "seq": 35,
+      "t": 110801
+    },
+    {
+      "type": "Revisited",
+      "racerId": "mistralai/mistral-nemo",
+      "title": "European Union",
+      "visits": 2,
+      "seq": 36,
+      "t": 110803
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 16,
+      "from": "European Union",
+      "to": "Slovakia",
+      "index": 85,
+      "usage": {
+        "promptTokens": 1841,
+        "completionTokens": 36,
+        "totalTokens": 1877,
+        "costUsd": 0.000054469
+      },
+      "latencyMs": 2923,
+      "reason": "Nigeria is a member of the EU.",
+      "seq": 37,
+      "t": 116281
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 17,
+      "from": "Slovakia",
+      "to": "European Union",
+      "index": 7,
+      "usage": {
+        "promptTokens": 1930,
+        "completionTokens": 33,
+        "totalTokens": 1963,
+        "costUsd": 0.00005696
+      },
+      "latencyMs": 2769,
+      "reason": "Go to the capital of Slovakia.",
+      "seq": 38,
+      "t": 119052
+    },
+    {
+      "type": "Revisited",
+      "racerId": "mistralai/mistral-nemo",
+      "title": "European Union",
+      "visits": 3,
+      "seq": 39,
+      "t": 119054
+    },
+    {
+      "type": "Circling",
+      "racerId": "mistralai/mistral-nemo",
+      "title": "European Union",
+      "visits": 3,
+      "seq": 40,
+      "t": 119055
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 18,
+      "from": "European Union",
+      "to": "Belgium",
+      "index": 63,
+      "usage": {
+        "promptTokens": 1857,
+        "completionTokens": 48,
+        "totalTokens": 1905,
+        "costUsd": 0.000055293
+      },
+      "latencyMs": 2472,
+      "reason": "Austria is a neighboring country to Slovakia and might have a connection to Nigeria through its history or culture.",
+      "seq": 41,
+      "t": 124160
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 19,
+      "from": "Belgium",
+      "to": "Belgian colonial empire",
+      "index": 111,
+      "usage": {
+        "promptTokens": 1879,
+        "completionTokens": 29,
+        "totalTokens": 1908,
+        "costUsd": 0.000055361
+      },
+      "latencyMs": 1935,
+      "reason": "Belgium was a colonial power, so this link might lead to Africa.",
+      "seq": 42,
+      "t": 127868
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 20,
+      "from": "Belgian colonial empire",
+      "to": "Democratic Republic of the Congo",
+      "index": 21,
+      "usage": {
+        "promptTokens": 1829,
+        "completionTokens": 38,
+        "totalTokens": 1867,
+        "costUsd": 0.000054181
+      },
+      "latencyMs": 3467,
+      "reason": "Nigeria is a former British colony, and the Belgian Congo was a former Belgian colony, so there might be a connection.",
+      "seq": 43,
+      "t": 134404
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 21,
+      "from": "Democratic Republic of the Congo",
+      "to": "Irreligion",
+      "index": 14,
+      "usage": {
+        "promptTokens": 2095,
+        "completionTokens": 37,
+        "totalTokens": 2132,
+        "costUsd": 0.000061865
+      },
+      "latencyMs": 2355,
+      "reason": "Nigeria is a former British colony, so I'll try to find a link related to British colonial history.",
+      "seq": 44,
+      "t": 139178
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 22,
+      "from": "Irreligion",
+      "to": "List of countries and dependencies by population (United Nations)",
+      "index": 28,
+      "usage": {
+        "promptTokens": 1749,
+        "completionTokens": 37,
+        "totalTokens": 1786,
+        "costUsd": 0.000051831
+      },
+      "latencyMs": 1705,
+      "reason": "Nigeria is the most populous country in Africa, so it might be linked from the article about population.",
+      "seq": 45,
+      "t": 142947
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 23,
+      "from": "List of countries and dependencies by population (United Nations)",
+      "to": "Nigeria",
+      "index": 20,
+      "usage": {
+        "promptTokens": 1523,
+        "completionTokens": 4,
+        "totalTokens": 1527,
+        "costUsd": 0.000044287
+      },
+      "latencyMs": 1393,
+      "seq": 46,
+      "t": 144343
+    },
+    {
+      "type": "Arrived",
+      "racerId": "mistralai/mistral-nemo",
+      "steps": 23,
+      "title": "Nigeria",
+      "seq": 47,
+      "t": 144345
+    },
+    {
+      "type": "RaceEnded",
+      "reason": "all-done",
+      "seq": 48,
+      "t": 144347
+    }
+  ]
+}

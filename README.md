@@ -10,6 +10,7 @@ It runs entirely in your browser. There is no backend: the app talks to [OpenRou
 - **Live graph.** A Canvas 2D neon renderer with pan, zoom, drag, a follow camera, article thumbnails inside the nodes, and thicker edges for repeated visits.
 - **Scoreboard, log and results.** Live standings (clicks, current article, cost, latency), a stream of each model's reasoning, and a finish screen with a podium and fastest/fewest-clicks awards.
 - **Replays.** Every race is an append-only event log, so any run can be exported as JSON, imported later and scrubbed through step by step.
+- **Example replays.** Five real races between actual models ship with the app. Pick one from "Example replays" in the setup dialog to watch it without an API key.
 - **Share a setup.** Copy a link that carries the chosen models, start, target and rules in the URL hash. Your API key is never included.
 - **Smart model picking.** Only models your OpenRouter account can actually run are offered, with search, pricing, a minimum-intelligence filter, saved groups and one-click presets (Fast & Cheap, Free, Flagships).
 - **Cost and loop controls.** Per-model budgets for steps, tokens and dollars, a per-page visit cap, loop detection, and a record of real cost per model call.
@@ -38,7 +39,7 @@ The build output in `dist/` is a plain static site and works from any path.
 
 ## How to play
 
-1. **Try the offline demo.** Click "Try Offline Demo" to watch four simulated models race straight away.
+1. **Try the offline demo.** Click "Try Offline Demo" to watch four simulated models race straight away. Or choose a recorded race from "Example replays", which are real runs of real models. (Some name a model as "Latest", which was whatever OpenRouter pointed that alias at on the day.)
 2. **Run a live race.** Paste your OpenRouter API key and test it, choose 2 to 6 models, set a target article (with live Wikipedia autocomplete, or paste an en.wikipedia.org link), roll a random obscure start article (under 100 daily pageviews), and press "Start Race".
 3. **Control it.**
    - `Space`: pause or resume

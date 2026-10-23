@@ -123,6 +123,7 @@ Module map and build log, newest work last. Keep it current (see Progress tracki
   - `src/ui/resultsModal.ts`: accessible `<dialog>` with podium, fastest and fewest clicks awards, path breakdowns.
 - **M6 Polish and Release (done):**
   - `src/race/replay.ts` & `src/ui/replayBar.ts`: reproducible JSON replay loader, timeline scrubber, play/pause, step-forward/step-backward, and speed controls.
+  - `src/examples/`: five bundled recordings (`*.json`, exported by the app) and `index.ts`, which lists them for the setup dialog's "Example replays" picker and lazy-loads each through `validateReplayData`. They are real recordings: add new ones by exporting a race and dropping the file in, never by editing events by hand. Check a candidate for secrets and provider error text first.
   - `src/ui/shareLink.ts`: URL hash serialization and deserialization for sharing setups without API keys.
   - Accessibility: screen-reader alternative (`describeGraph` in aria-live region), keyboard navigation, `:focus-visible` states, `prefers-reduced-motion` compliance.
   - Tests: 256 passing across 28 test files, including a full end-to-end lifecycle smoke test.

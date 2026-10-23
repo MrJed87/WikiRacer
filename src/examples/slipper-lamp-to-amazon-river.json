@@ -1,0 +1,581 @@
+{
+  "app": "Wikipedia Graph Race",
+  "version": 1,
+  "exportedAt": "2026-10-23T09:40:09.245Z",
+  "config": {
+    "start": "Slipper lamp",
+    "target": "Amazon River",
+    "targetSummary": "The Amazon River in South America is the largest river in the world by discharge volume of water, and the second-longest or longest river system in the world, a title which is disputed with the Nile. For nearly a century, the headwaters of the Apurímac River on Nevado Mismi in Peru had been considered the Amazon basin's most distant source, until a 2014 study found the farthest source to be the headwaters of the Mantaro River on the Cordillera Rumi Cruz in Peru. The Mantaro and Apurímac rivers join, and with other tributaries form the Ucayali River, which in turn meets the Marañón River…",
+    "maxSteps": 30,
+    "linkCap": 150,
+    "temperature": 0.2,
+    "circlingThreshold": 3,
+    "maxVisitsPerPage": 3,
+    "reasoningEffort": "low",
+    "maxOutputTokens": 4000,
+    "budgetUsd": 0.5,
+    "budgetTokens": 400000,
+    "stepDelayMs": 0,
+    "stopOnFirstArrival": false,
+    "lockstep": true,
+    "promptVersion": 1
+  },
+  "racers": [
+    {
+      "id": "anthropic/claude-haiku-5.5",
+      "label": "Anthropic: Claude Haiku 5.5",
+      "colorIndex": 0
+    },
+    {
+      "id": "~openai/gpt-luna-latest",
+      "label": "OpenAI: GPT Luna Latest",
+      "colorIndex": 1
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "label": "Z.ai: GLM 5.3 Flash",
+      "colorIndex": 2
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "label": "inclusionAI: Ling 3.0 Flash",
+      "colorIndex": 3
+    },
+    {
+      "id": "~deepseek/deepseek-flash-latest",
+      "label": "DeepSeek: DeepSeek Flash Latest",
+      "colorIndex": 4
+    },
+    {
+      "id": "~google/gemini-flash-latest",
+      "label": "Google: Gemini Flash Latest",
+      "colorIndex": 5
+    }
+  ],
+  "events": [
+    {
+      "type": "RaceStarted",
+      "config": {
+        "start": "Slipper lamp",
+        "target": "Amazon River",
+        "targetSummary": "The Amazon River in South America is the largest river in the world by discharge volume of water, and the second-longest or longest river system in the world, a title which is disputed with the Nile. For nearly a century, the headwaters of the Apurímac River on Nevado Mismi in Peru had been considered the Amazon basin's most distant source, until a 2014 study found the farthest source to be the headwaters of the Mantaro River on the Cordillera Rumi Cruz in Peru. The Mantaro and Apurímac rivers join, and with other tributaries form the Ucayali River, which in turn meets the Marañón River…",
+        "maxSteps": 30,
+        "linkCap": 150,
+        "temperature": 0.2,
+        "circlingThreshold": 3,
+        "maxVisitsPerPage": 3,
+        "reasoningEffort": "low",
+        "maxOutputTokens": 4000,
+        "budgetUsd": 0.5,
+        "budgetTokens": 400000,
+        "stepDelayMs": 0,
+        "stopOnFirstArrival": false,
+        "lockstep": true,
+        "promptVersion": 1
+      },
+      "racers": [
+        {
+          "id": "anthropic/claude-haiku-5.5",
+          "label": "Anthropic: Claude Haiku 5.5",
+          "colorIndex": 0
+        },
+        {
+          "id": "~openai/gpt-luna-latest",
+          "label": "OpenAI: GPT Luna Latest",
+          "colorIndex": 1
+        },
+        {
+          "id": "z-ai/glm-5.3-flash",
+          "label": "Z.ai: GLM 5.3 Flash",
+          "colorIndex": 2
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "label": "inclusionAI: Ling 3.0 Flash",
+          "colorIndex": 3
+        },
+        {
+          "id": "~deepseek/deepseek-flash-latest",
+          "label": "DeepSeek: DeepSeek Flash Latest",
+          "colorIndex": 4
+        },
+        {
+          "id": "~google/gemini-flash-latest",
+          "label": "Google: Gemini Flash Latest",
+          "colorIndex": 5
+        }
+      ],
+      "startedAtEpochMs": 1792747762551,
+      "seq": 0,
+      "t": 0
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "anthropic/claude-haiku-5.5",
+      "step": 1,
+      "from": "Slipper lamp",
+      "to": "Jordan",
+      "index": 56,
+      "usage": {
+        "promptTokens": 2056,
+        "completionTokens": 132,
+        "totalTokens": 2188,
+        "costUsd": 0.0002716
+      },
+      "latencyMs": 1715,
+      "reason": "Jordan is a country bordering regions; hub page that may link toward South American rivers indirectly... but better: Egypt/Levant hubs are large. Choosing Egypt likely leads to Nile, which links to Amazon as rival longest river.",
+      "seq": 1,
+      "t": 4480
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~openai/gpt-luna-latest",
+      "step": 1,
+      "from": "Slipper lamp",
+      "to": "Jordan",
+      "index": 56,
+      "usage": {
+        "promptTokens": 1037,
+        "completionTokens": 41,
+        "totalTokens": 1078,
+        "costUsd": 0.0001242
+      },
+      "latencyMs": 2422,
+      "reason": "Jordan is a broad geographic article that may link to South America or major rivers.",
+      "seq": 2,
+      "t": 4482
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~google/gemini-flash-latest",
+      "step": 1,
+      "from": "Slipper lamp",
+      "to": "Egypt",
+      "index": 71,
+      "usage": {
+        "promptTokens": 1084,
+        "completionTokens": 117,
+        "totalTokens": 1201,
+        "costUsd": 0.00125175
+      },
+      "latencyMs": 3216,
+      "reason": "Egypt is a major geographic/country article with direct links to geography, rivers, or continents.",
+      "seq": 3,
+      "t": 7531
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~deepseek/deepseek-flash-latest",
+      "step": 1,
+      "from": "Slipper lamp",
+      "to": "Egypt",
+      "index": 71,
+      "usage": {
+        "promptTokens": 1320,
+        "completionTokens": 920,
+        "totalTokens": 2240,
+        "costUsd": 0.0005524
+      },
+      "latencyMs": 5872,
+      "reason": "Egypt is a broad geographic hub that links to the Mediterranean Sea, then the Atlantic Ocean, and onward to the Amazon River.",
+      "seq": 4,
+      "t": 7533
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "z-ai/glm-5.3-flash",
+      "step": 1,
+      "from": "Slipper lamp",
+      "to": "Egypt",
+      "index": 71,
+      "usage": {
+        "promptTokens": 1227,
+        "completionTokens": 400,
+        "totalTokens": 1627,
+        "costUsd": 0.0000857804
+      },
+      "latencyMs": 5892,
+      "reason": "Egypt is a broad hub that links to the Nile, a stepping stone toward the Amazon River.",
+      "seq": 5,
+      "t": 7534
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 1,
+      "from": "Slipper lamp",
+      "to": "Oil lamp",
+      "index": 2,
+      "usage": {
+        "promptTokens": 1355,
+        "completionTokens": 953,
+        "totalTokens": 2308,
+        "costUsd": 0.000088494
+      },
+      "latencyMs": 5297,
+      "reason": "Choosing 'Oil lamp' as a broad general topic that may connect to lamp-making traditions worldwide, potentially including South American or Peruvian connections that could lead toward the Amazon River.",
+      "seq": 6,
+      "t": 10302
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "anthropic/claude-haiku-5.5",
+      "step": 2,
+      "from": "Jordan",
+      "to": "Nile",
+      "index": 112,
+      "usage": {
+        "promptTokens": 2987,
+        "completionTokens": 82,
+        "totalTokens": 3069,
+        "costUsd": 0.0003397
+      },
+      "latencyMs": 1683,
+      "reason": "Nile is a major river; a related river article is the closest stepping stone toward Amazon River.",
+      "seq": 7,
+      "t": 14446
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~openai/gpt-luna-latest",
+      "step": 2,
+      "from": "Jordan",
+      "to": "Nile",
+      "index": 112,
+      "usage": {
+        "promptTokens": 1599,
+        "completionTokens": 41,
+        "totalTokens": 1640,
+        "costUsd": 0.000217075
+      },
+      "latencyMs": 2259,
+      "reason": "The Nile article is a major river hub likely to link to the Amazon River.",
+      "seq": 8,
+      "t": 14448
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "z-ai/glm-5.3-flash",
+      "step": 2,
+      "from": "Egypt",
+      "to": "Nile Delta",
+      "index": 78,
+      "usage": {
+        "promptTokens": 1768,
+        "completionTokens": 205,
+        "totalTokens": 1973,
+        "costUsd": 0.0000498861
+      },
+      "latencyMs": 2714,
+      "reason": "Nile Delta links to Nile, a stepping stone toward the Amazon River.",
+      "seq": 9,
+      "t": 16328
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~deepseek/deepseek-flash-latest",
+      "step": 2,
+      "from": "Egypt",
+      "to": "Nile Delta",
+      "index": 78,
+      "usage": {
+        "promptTokens": 1857,
+        "completionTokens": 397,
+        "totalTokens": 2254,
+        "costUsd": 0.00032849
+      },
+      "latencyMs": 4021,
+      "reason": "The Nile Delta article should link to the Nile, whose article commonly links to the Amazon River for comparison.",
+      "seq": 10,
+      "t": 16329
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 2,
+      "from": "Oil lamp",
+      "to": "Kerosene",
+      "index": 28,
+      "usage": {
+        "promptTokens": 1888,
+        "completionTokens": 524,
+        "totalTokens": 2412,
+        "costUsd": 0.00007266
+      },
+      "latencyMs": 3304,
+      "reason": "Kerosene is a fuel directly related to oil lamps (kerosene lamps are a common type of oil lamp), and from there I can navigate toward petroleum/oil industry topics that connect to the Amazon region.",
+      "seq": 11,
+      "t": 18216
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~google/gemini-flash-latest",
+      "step": 2,
+      "from": "Egypt",
+      "to": "Nile Delta",
+      "index": 78,
+      "usage": {
+        "promptTokens": 1845,
+        "completionTokens": 50,
+        "totalTokens": 1895,
+        "costUsd": 0.00157125
+      },
+      "latencyMs": 14129,
+      "reason": "The Nile Delta links directly to the Nile River, which is closely compared and linked to the Amazon River as the world's longest/largest rivers.",
+      "seq": 12,
+      "t": 24434
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "anthropic/claude-haiku-5.5",
+      "step": 3,
+      "from": "Nile",
+      "to": "Amazon River",
+      "index": 26,
+      "usage": {
+        "promptTokens": 2800,
+        "completionTokens": 74,
+        "totalTokens": 2874,
+        "costUsd": 0.000317
+      },
+      "latencyMs": 1117,
+      "reason": "Amazon River is the target; it's directly linked from Nile page.",
+      "seq": 13,
+      "t": 25552
+    },
+    {
+      "type": "Arrived",
+      "racerId": "anthropic/claude-haiku-5.5",
+      "steps": 3,
+      "title": "Amazon River",
+      "seq": 14,
+      "t": 25554
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~openai/gpt-luna-latest",
+      "step": 3,
+      "from": "Nile",
+      "to": "Amazon River",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1523,
+        "completionTokens": 39,
+        "totalTokens": 1562,
+        "costUsd": 0.000206575
+      },
+      "latencyMs": 1472,
+      "reason": "Amazon River is directly linked from the Nile article and is the target.",
+      "seq": 15,
+      "t": 25908
+    },
+    {
+      "type": "Arrived",
+      "racerId": "~openai/gpt-luna-latest",
+      "steps": 3,
+      "title": "Amazon River",
+      "seq": 16,
+      "t": 25910
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~deepseek/deepseek-flash-latest",
+      "step": 3,
+      "from": "Nile Delta",
+      "to": "Nile",
+      "index": 7,
+      "usage": {
+        "promptTokens": 1553,
+        "completionTokens": 108,
+        "totalTokens": 1661,
+        "costUsd": 0.00012303
+      },
+      "latencyMs": 1549,
+      "reason": "The Nile article is likely to link to the Amazon River as a comparison of major rivers.",
+      "seq": 17,
+      "t": 25985
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~google/gemini-flash-latest",
+      "step": 3,
+      "from": "Nile Delta",
+      "to": "Nile",
+      "index": 7,
+      "usage": {
+        "promptTokens": 1370,
+        "completionTokens": 85,
+        "totalTokens": 1455,
+        "costUsd": 0.00134625
+      },
+      "latencyMs": 2591,
+      "reason": "Nile directly compares with the Amazon River as the longest rivers in the world.",
+      "seq": 18,
+      "t": 27028
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "z-ai/glm-5.3-flash",
+      "step": 3,
+      "from": "Nile Delta",
+      "to": "Nile",
+      "index": 7,
+      "usage": {
+        "promptTokens": 1474,
+        "completionTokens": 221,
+        "totalTokens": 1695,
+        "costUsd": 0.0000515333
+      },
+      "latencyMs": 2922,
+      "reason": "Nile article likely links to rivers and possibly Amazon comparison.",
+      "seq": 19,
+      "t": 27358
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 3,
+      "from": "Kerosene",
+      "to": "Argentina",
+      "index": 30,
+      "usage": {
+        "promptTokens": 1875,
+        "completionTokens": 703,
+        "totalTokens": 2578,
+        "costUsd": 0.000083664
+      },
+      "latencyMs": 4515,
+      "reason": "Argentina is a South American country that could lead to broader South American topics and eventually the Amazon River.",
+      "seq": 20,
+      "t": 31800
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~deepseek/deepseek-flash-latest",
+      "step": 4,
+      "from": "Nile",
+      "to": "Amazon River",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1803,
+        "completionTokens": 92,
+        "totalTokens": 1895,
+        "costUsd": 0.00017221
+      },
+      "latencyMs": 1281,
+      "reason": "The Nile article directly links to the Amazon River, reaching the target immediately.",
+      "seq": 21,
+      "t": 33083
+    },
+    {
+      "type": "Arrived",
+      "racerId": "~deepseek/deepseek-flash-latest",
+      "steps": 4,
+      "title": "Amazon River",
+      "seq": 22,
+      "t": 33086
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~google/gemini-flash-latest",
+      "step": 4,
+      "from": "Nile",
+      "to": "Amazon River",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1688,
+        "completionTokens": 37,
+        "totalTokens": 1725,
+        "costUsd": 0.00140475
+      },
+      "latencyMs": 2165,
+      "reason": "\"Amazon River\" is the target article and directly listed as link 26.",
+      "seq": 23,
+      "t": 33968
+    },
+    {
+      "type": "Arrived",
+      "racerId": "~google/gemini-flash-latest",
+      "steps": 4,
+      "title": "Amazon River",
+      "seq": 24,
+      "t": 33971
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "z-ai/glm-5.3-flash",
+      "step": 4,
+      "from": "Nile",
+      "to": "Amazon River",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1715,
+        "completionTokens": 171,
+        "totalTokens": 1886,
+        "costUsd": 0.0000428615
+      },
+      "latencyMs": 3851,
+      "reason": "Direct link to the target Amazon River.",
+      "seq": 25,
+      "t": 35654
+    },
+    {
+      "type": "Arrived",
+      "racerId": "z-ai/glm-5.3-flash",
+      "steps": 4,
+      "title": "Amazon River",
+      "seq": 26,
+      "t": 35655
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 4,
+      "from": "Argentina",
+      "to": "South America",
+      "index": 76,
+      "usage": {
+        "promptTokens": 2097,
+        "completionTokens": 244,
+        "totalTokens": 2341,
+        "costUsd": 0.0000497322
+      },
+      "latencyMs": 2159,
+      "reason": "South America is a broad geographic hub article that will contain links to major rivers including the Amazon River, providing the most direct path from Argentina to the target.",
+      "seq": 27,
+      "t": 36268
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 5,
+      "from": "South America",
+      "to": "Amazon River",
+      "index": 105,
+      "usage": {
+        "promptTokens": 1929,
+        "completionTokens": 96,
+        "totalTokens": 2025,
+        "costUsd": 0.0000368802
+      },
+      "latencyMs": 1517,
+      "reason": "The Amazon River is directly linked from the South America page at index 105, providing the shortest path to the target.",
+      "seq": 28,
+      "t": 37787
+    },
+    {
+      "type": "Arrived",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "steps": 5,
+      "title": "Amazon River",
+      "seq": 29,
+      "t": 37789
+    },
+    {
+      "type": "RaceEnded",
+      "reason": "all-done",
+      "seq": 30,
+      "t": 37791
+    }
+  ]
+}

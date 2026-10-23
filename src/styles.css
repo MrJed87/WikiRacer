@@ -1347,6 +1347,10 @@ body {
   align-items: center;
   gap: 8px;
 }
+.example-replay-select {
+  cursor: pointer;
+  max-width: 220px;
+}
 .btn-close-setup {
   font-size: 16px;
   padding: 4px 8px;

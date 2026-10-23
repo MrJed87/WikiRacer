@@ -42,6 +42,7 @@ import { toast } from './toasts';
 import { racerColor } from '../graph/palette';
 import { copyShareLink, decodeShareConfig } from './shareLink';
 import { validateReplayData, type ReplayData } from '../race/replay';
+import { EXAMPLE_REPLAYS, loadExampleReplay } from '../examples';
 import type { RaceConfig, Racer } from '../race/types';
 
 export interface SetupRaceParams {
@@ -219,6 +220,10 @@ export class SetupPanel {
           </div>
           <div class="setup-header-actions">
             <input type="file" id="replay-file-input" accept=".json,application/json" class="is-hidden" />
+            <select class="btn example-replay-select" id="example-replay-select" aria-label="Watch an example replay" title="Watch a recorded example race">
+              <option value="">▶ Example replays</option>
+              ${EXAMPLE_REPLAYS.map((e) => `<option value="${e.id}" title="${e.blurb}">${e.title}</option>`).join('')}
+            </select>
             <button type="button" class="btn" id="btn-import-replay" title="Load an exported race JSON replay">📥 Replay JSON</button>
             <button type="button" class="btn btn-primary" id="btn-quick-demo">⚡ Try Offline Demo</button>
             <button type="button" class="btn btn-ghost btn-close-setup is-hidden" id="btn-close-setup" title="Close setup" aria-label="Close setup">✕</button>
@@ -490,6 +495,25 @@ export class SetupPanel {
     // Quick Demo button
     this.element.querySelector('#btn-quick-demo')?.addEventListener('click', () => {
       this.callbacks.onLaunchDemo();
+    });
+
+    // Bundled example replays
+    const exampleSelect = this.element.querySelector('#example-replay-select') as HTMLSelectElement;
+    exampleSelect?.addEventListener('change', () => {
+      const id = exampleSelect.value;
+      exampleSelect.value = '';
+      if (!id) return;
+      loadExampleReplay(id).then(
+        (replayData) => this.callbacks.onLoadReplay?.(replayData),
+        (err: unknown) => {
+          toast.show(
+            `Could not load that example: ${err instanceof Error ? err.message : String(err)}`,
+            {
+              type: 'error',
+            },
+          );
+        },
+      );
     });
 
     // Replay File Import
