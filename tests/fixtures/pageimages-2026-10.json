@@ -1,0 +1,42 @@
+{
+    "batchcomplete": true,
+    "query": {
+        "pages": [
+            {
+                "pageid": 9239,
+                "ns": 0,
+                "title": "Europe",
+                "thumbnail": {
+                    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Europe_orthographic_Caucasus_Urals_boundary_%28with_borders%29.svg/120px-Europe_orthographic_Caucasus_Urals_boundary_%28with_borders%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+                    "width": 96,
+                    "height": 96
+                }
+            },
+            {
+                "pageid": 21148,
+                "ns": 0,
+                "title": "Netherlands",
+                "thumbnail": {
+                    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Flag_of_the_Netherlands.svg/120px-Flag_of_the_Netherlands.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+                    "width": 96,
+                    "height": 64
+                }
+            },
+            {
+                "pageid": 165278,
+                "ns": 0,
+                "title": "Gillingham F.C."
+            },
+            {
+                "pageid": 4689709,
+                "ns": 0,
+                "title": "John Howard",
+                "thumbnail": {
+                    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Howard_John_BANNER.jpg/120px-Howard_John_BANNER.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+                    "width": 96,
+                    "height": 135
+                }
+            }
+        ]
+    }
+}

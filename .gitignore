@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+.env
+.env.*
+*.local
+.vscode
+AUDIT.md
+ROADMAP.md
+TODO.md

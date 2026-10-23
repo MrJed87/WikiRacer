@@ -1,0 +1,1090 @@
+{
+  "app": "Wikipedia Graph Race",
+  "version": 1,
+  "exportedAt": "2026-10-22T01:05:42.069Z",
+  "config": {
+    "start": "London Monster",
+    "target": "John Howard",
+    "targetSummary": "John Winston Howard (born 26 July 1939) is an Australian former politician who served as the 25th prime minister of Australia from 1996 to 2007, holding office as leader of the Liberal Party of Australia. His eleven-year tenure as prime minister is the second-longest in Australian history, after that of Robert Menzies. Howard was born in Sydney and studied law at the University of Sydney. He was a commercial lawyer before entering parliament. A former federal president of the Young Liberals, he first stood for office at the 1968 New South Wales state election, but lost narrowly. At the 1974…",
+    "maxSteps": 30,
+    "linkCap": 150,
+    "temperature": 0.2,
+    "circlingThreshold": 3,
+    "maxVisitsPerPage": 3,
+    "budgetUsd": 0.5,
+    "budgetTokens": 400000,
+    "stepDelayMs": 0,
+    "stopOnFirstArrival": false,
+    "lockstep": true,
+    "promptVersion": 1
+  },
+  "racers": [
+    {
+      "id": "meta-llama/llama-3.1-8b-instruct",
+      "label": "Meta: Llama 3.1 8B Instruct",
+      "colorIndex": 0
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "label": "inclusionAI: Ling 3.0 Flash",
+      "colorIndex": 1
+    },
+    {
+      "id": "mistralai/mistral-nemo",
+      "label": "Mistral: Mistral Nemo",
+      "colorIndex": 2
+    },
+    {
+      "id": "~z-ai/glm-flash-latest",
+      "label": "Z.ai: GLM Flash Latest",
+      "colorIndex": 3
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash-1017",
+      "label": "DeepSeek: DeepSeek V4.1 Flash 1017",
+      "colorIndex": 4
+    }
+  ],
+  "events": [
+    {
+      "type": "RaceStarted",
+      "config": {
+        "start": "London Monster",
+        "target": "John Howard",
+        "targetSummary": "John Winston Howard (born 26 July 1939) is an Australian former politician who served as the 25th prime minister of Australia from 1996 to 2007, holding office as leader of the Liberal Party of Australia. His eleven-year tenure as prime minister is the second-longest in Australian history, after that of Robert Menzies. Howard was born in Sydney and studied law at the University of Sydney. He was a commercial lawyer before entering parliament. A former federal president of the Young Liberals, he first stood for office at the 1968 New South Wales state election, but lost narrowly. At the 1974…",
+        "maxSteps": 30,
+        "linkCap": 150,
+        "temperature": 0.2,
+        "circlingThreshold": 3,
+        "maxVisitsPerPage": 3,
+        "budgetUsd": 0.5,
+        "budgetTokens": 400000,
+        "stepDelayMs": 0,
+        "stopOnFirstArrival": false,
+        "lockstep": true,
+        "promptVersion": 1
+      },
+      "racers": [
+        {
+          "id": "meta-llama/llama-3.1-8b-instruct",
+          "label": "Meta: Llama 3.1 8B Instruct",
+          "colorIndex": 0
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "label": "inclusionAI: Ling 3.0 Flash",
+          "colorIndex": 1
+        },
+        {
+          "id": "mistralai/mistral-nemo",
+          "label": "Mistral: Mistral Nemo",
+          "colorIndex": 2
+        },
+        {
+          "id": "~z-ai/glm-flash-latest",
+          "label": "Z.ai: GLM Flash Latest",
+          "colorIndex": 3
+        },
+        {
+          "id": "deepseek/deepseek-v4.1-flash-1017",
+          "label": "DeepSeek: DeepSeek V4.1 Flash 1017",
+          "colorIndex": 4
+        }
+      ],
+      "startedAtEpochMs": 1792631033440,
+      "seq": 0,
+      "t": 0
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 1,
+      "from": "London Monster",
+      "to": "Artificial plants",
+      "index": 2,
+      "usage": {
+        "promptTokens": 1352,
+        "completionTokens": 33,
+        "totalTokens": 1385,
+        "costUsd": 0.0003047
+      },
+      "latencyMs": 1002,
+      "reason": "The London Monster used artificial flowers to make a living, so this link might be relevant to his background.",
+      "seq": 1,
+      "t": 2821
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 1,
+      "from": "London Monster",
+      "to": "The Times",
+      "index": 18,
+      "usage": {
+        "promptTokens": 1329,
+        "completionTokens": 31,
+        "totalTokens": 1360,
+        "costUsd": 0.000104546
+      },
+      "latencyMs": 1573,
+      "reason": "The Times is a broad hub likely linking to modern politics and Australia.",
+      "seq": 2,
+      "t": 5042
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4.1-flash-1017",
+      "step": 1,
+      "from": "London Monster",
+      "to": "The Times",
+      "index": 18,
+      "usage": {
+        "promptTokens": 1467,
+        "completionTokens": 266,
+        "totalTokens": 1733,
+        "costUsd": 0.00023569
+      },
+      "latencyMs": 2951,
+      "reason": "The Times is a broad publication likely to link to Australia and Australian political figures, providing a route toward John Howard.",
+      "seq": 3,
+      "t": 5044
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 1,
+      "from": "London Monster",
+      "to": "St James's Street",
+      "index": 28,
+      "usage": {
+        "promptTokens": 1366,
+        "completionTokens": 52,
+        "totalTokens": 1418,
+        "costUsd": 0.000041174
+      },
+      "latencyMs": 1903,
+      "reason": "St James's Street is a broad, commercial street in the St James's district of central London. It is likely to have a more general article about London, which could lead to John Howard.",
+      "seq": 4,
+      "t": 6584
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 1,
+      "from": "London Monster",
+      "to": "Penal transportation",
+      "index": 50,
+      "usage": {
+        "promptTokens": 1538,
+        "completionTokens": 1004,
+        "totalTokens": 2542,
+        "costUsd": 0.00009555
+      },
+      "latencyMs": 6527,
+      "reason": "Penal transportation connects the London Monster's criminal punishment to Australia, creating a thematic bridge toward John Howard, the Australian prime minister.",
+      "seq": 5,
+      "t": 10372
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 2,
+      "from": "Artificial plants",
+      "to": "England",
+      "index": 26,
+      "usage": {
+        "promptTokens": 924,
+        "completionTokens": 30,
+        "totalTokens": 954,
+        "costUsd": 0.00020988
+      },
+      "latencyMs": 668,
+      "reason": "Looking for a broad hub article to reach John Howard, England is a good stepping stone.",
+      "seq": 6,
+      "t": 16425
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 2,
+      "from": "The Times",
+      "to": "Rupert Murdoch",
+      "index": 82,
+      "usage": {
+        "promptTokens": 1719,
+        "completionTokens": 78,
+        "totalTokens": 1797,
+        "costUsd": 0.000142806
+      },
+      "latencyMs": 1509,
+      "reason": "Rupert Murdoch's page covers Australian politics and likely links to John Howard.",
+      "seq": 7,
+      "t": 19162
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 2,
+      "from": "St James's Street",
+      "to": "St James's Palace",
+      "index": 5,
+      "usage": {
+        "promptTokens": 833,
+        "completionTokens": 37,
+        "totalTokens": 870,
+        "costUsd": 0.000025267
+      },
+      "latencyMs": 2046,
+      "reason": "St James's Palace is a significant historical location in London, which might lead to a broader topic related to history or royalty.",
+      "seq": 8,
+      "t": 20941
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 2,
+      "from": "Penal transportation",
+      "to": "Australia",
+      "index": 22,
+      "usage": {
+        "promptTokens": 2046,
+        "completionTokens": 279,
+        "totalTokens": 2325,
+        "costUsd": 0.000060543
+      },
+      "latencyMs": 2576,
+      "reason": "Australia is a broad hub article that would link to Australian Prime Ministers, including John Howard, the 25th PM of Australia.",
+      "seq": 9,
+      "t": 23750
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4.1-flash-1017",
+      "step": 2,
+      "from": "The Times",
+      "to": "Rupert Murdoch",
+      "index": 82,
+      "usage": {
+        "promptTokens": 1839,
+        "completionTokens": 1947,
+        "totalTokens": 3786,
+        "costUsd": 0.001086358
+      },
+      "latencyMs": 17892,
+      "reason": "Rupert Murdoch is Australian-born and his page likely links to John Howard or Australia, providing a strong route toward the target.",
+      "seq": 10,
+      "t": 28267
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "~z-ai/glm-flash-latest",
+      "step": 3,
+      "from": "Rupert Murdoch",
+      "to": "John Howard",
+      "index": 93,
+      "usage": {
+        "promptTokens": 1700,
+        "completionTokens": 24,
+        "totalTokens": 1724,
+        "costUsd": 0.0001306
+      },
+      "latencyMs": 1137,
+      "reason": "Direct link to target John Howard.",
+      "seq": 11,
+      "t": 29407
+    },
+    {
+      "type": "Arrived",
+      "racerId": "~z-ai/glm-flash-latest",
+      "steps": 3,
+      "title": "John Howard",
+      "seq": 12,
+      "t": 29408
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 3,
+      "from": "St James's Palace",
+      "to": "Australia",
+      "index": 85,
+      "usage": {
+        "promptTokens": 1672,
+        "completionTokens": 26,
+        "totalTokens": 1698,
+        "costUsd": 0.000049268
+      },
+      "latencyMs": 1819,
+      "reason": "Australia is a country where John Howard served as prime minister",
+      "seq": 13,
+      "t": 30088
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "deepseek/deepseek-v4.1-flash-1017",
+      "step": 3,
+      "from": "Rupert Murdoch",
+      "to": "John Howard",
+      "index": 93,
+      "usage": {
+        "promptTokens": 1841,
+        "completionTokens": 99,
+        "totalTokens": 1940,
+        "costUsd": 0.000162498
+      },
+      "latencyMs": 2243,
+      "reason": "The page directly links to the target article, John Howard.",
+      "seq": 14,
+      "t": 30513
+    },
+    {
+      "type": "Arrived",
+      "racerId": "deepseek/deepseek-v4.1-flash-1017",
+      "steps": 3,
+      "title": "John Howard",
+      "seq": 15,
+      "t": 30515
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 3,
+      "from": "England",
+      "to": "United Kingdom",
+      "index": 5,
+      "usage": {
+        "promptTokens": 1689,
+        "completionTokens": 31,
+        "totalTokens": 1720,
+        "costUsd": 0.0003784
+      },
+      "latencyMs": 915,
+      "reason": "Link to the UK, a broad hub article that is likely to link to the target article.",
+      "seq": 16,
+      "t": 31812
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 3,
+      "from": "Australia",
+      "to": "Prime Minister of Australia",
+      "index": 27,
+      "usage": {
+        "promptTokens": 2049,
+        "completionTokens": 167,
+        "totalTokens": 2216,
+        "costUsd": 0.00005355
+      },
+      "latencyMs": 1954,
+      "reason": "Prime Minister of Australia is the direct hub article that lists all prime ministers, including John Howard as the 25th PM.",
+      "seq": 17,
+      "t": 33962
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "step": 4,
+      "from": "Prime Minister of Australia",
+      "to": "John Howard",
+      "index": 96,
+      "usage": {
+        "promptTokens": 2107,
+        "completionTokens": 92,
+        "totalTokens": 2199,
+        "costUsd": 0.000050043
+      },
+      "latencyMs": 1467,
+      "reason": "John Howard is listed as link 96 on this page, directly leading to the target article.",
+      "seq": 18,
+      "t": 35434
+    },
+    {
+      "type": "Arrived",
+      "racerId": "inclusionai/ling-3.0-flash",
+      "steps": 4,
+      "title": "John Howard",
+      "seq": 19,
+      "t": 35436
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 4,
+      "from": "Australia",
+      "to": "Prime Minister of Australia",
+      "index": 27,
+      "usage": {
+        "promptTokens": 1888,
+        "completionTokens": 25,
+        "totalTokens": 1913,
+        "costUsd": 0.000055502
+      },
+      "latencyMs": 1646,
+      "reason": "Prime Minister of Australia is a good step towards the target.",
+      "seq": 20,
+      "t": 35611
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 4,
+      "from": "United Kingdom",
+      "to": "Wales",
+      "index": 78,
+      "usage": {
+        "promptTokens": 1812,
+        "completionTokens": 21,
+        "totalTokens": 1833,
+        "costUsd": 0.00040326
+      },
+      "latencyMs": 634,
+      "reason": "Link to a constituent country of the UK.",
+      "seq": 21,
+      "t": 38879
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 5,
+      "from": "Wales",
+      "to": "United Kingdom",
+      "index": 6,
+      "usage": {
+        "promptTokens": 1779,
+        "completionTokens": 25,
+        "totalTokens": 1804,
+        "costUsd": 0.00039688
+      },
+      "latencyMs": 629,
+      "reason": "Link to a broader category that may lead to the target article.",
+      "seq": 22,
+      "t": 39511
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "United Kingdom",
+      "visits": 2,
+      "seq": 23,
+      "t": 39512
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "mistralai/mistral-nemo",
+      "step": 5,
+      "from": "Prime Minister of Australia",
+      "to": "John Howard",
+      "index": 96,
+      "usage": {
+        "promptTokens": 1935,
+        "completionTokens": 33,
+        "totalTokens": 1968,
+        "costUsd": 0.000057105
+      },
+      "latencyMs": 2617,
+      "reason": "John Howard is a former prime minister of Australia, which might lead to a relevant article.",
+      "seq": 24,
+      "t": 41498
+    },
+    {
+      "type": "Arrived",
+      "racerId": "mistralai/mistral-nemo",
+      "steps": 5,
+      "title": "John Howard",
+      "seq": 25,
+      "t": 41500
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 6,
+      "from": "United Kingdom",
+      "to": "Wales",
+      "index": 78,
+      "usage": {
+        "promptTokens": 1831,
+        "completionTokens": 33,
+        "totalTokens": 1864,
+        "costUsd": 0.00041008
+      },
+      "latencyMs": 691,
+      "reason": "Link to England, a country that is part of the UK and may have a link to John Howard.",
+      "seq": 26,
+      "t": 42193
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Wales",
+      "visits": 2,
+      "seq": 27,
+      "t": 42194
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 7,
+      "from": "Wales",
+      "to": "Demonym",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1797,
+        "completionTokens": 21,
+        "totalTokens": 1818,
+        "costUsd": 0.00039996
+      },
+      "latencyMs": 733,
+      "reason": "Choose a link related to the Welsh people.",
+      "seq": 28,
+      "t": 44871
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 8,
+      "from": "Demonym",
+      "to": "Country",
+      "index": 16,
+      "usage": {
+        "promptTokens": 1504,
+        "completionTokens": 36,
+        "totalTokens": 1540,
+        "costUsd": 0.0003388
+      },
+      "latencyMs": 840,
+      "reason": "Country is a broad hub article that may link to Australia, which is a step closer to the target article John Howard.",
+      "seq": 29,
+      "t": 49152
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 9,
+      "from": "Country",
+      "to": "Sovereign state",
+      "index": 2,
+      "usage": {
+        "promptTokens": 1616,
+        "completionTokens": 32,
+        "totalTokens": 1648,
+        "costUsd": 0.00036256
+      },
+      "latencyMs": 687,
+      "reason": "This link is related to countries with limited recognition, which might be helpful in reaching the target article.",
+      "seq": 30,
+      "t": 52483
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 10,
+      "from": "Sovereign state",
+      "to": "Dependent territory",
+      "index": 7,
+      "usage": {
+        "promptTokens": 1416,
+        "completionTokens": 18,
+        "totalTokens": 1434,
+        "costUsd": 0.00031548
+      },
+      "latencyMs": 561,
+      "reason": "Linking to a related concept",
+      "seq": 31,
+      "t": 55956
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 11,
+      "from": "Dependent territory",
+      "to": "Sovereign state",
+      "index": 4,
+      "usage": {
+        "promptTokens": 1786,
+        "completionTokens": 17,
+        "totalTokens": 1803,
+        "costUsd": 0.00039666
+      },
+      "latencyMs": 1624,
+      "reason": "Link to a related concept",
+      "seq": 32,
+      "t": 57581
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Sovereign state",
+      "visits": 2,
+      "seq": 33,
+      "t": 57583
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 12,
+      "from": "Sovereign state",
+      "to": "Border",
+      "index": 12,
+      "usage": {
+        "promptTokens": 1441,
+        "completionTokens": 28,
+        "totalTokens": 1469,
+        "costUsd": 0.00032318
+      },
+      "latencyMs": 649,
+      "reason": "Looking for a related concept to sovereign state, which is closely related to borders.",
+      "seq": 34,
+      "t": 60251
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 13,
+      "from": "Border",
+      "to": "Sovereign state",
+      "index": 6,
+      "usage": {
+        "promptTokens": 1594,
+        "completionTokens": 31,
+        "totalTokens": 1625,
+        "costUsd": 0.0003575
+      },
+      "latencyMs": 639,
+      "reason": "Sovereign state is a broad hub article that could link to the target article John Howard.",
+      "seq": 35,
+      "t": 60892
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Sovereign state",
+      "visits": 3,
+      "seq": 36,
+      "t": 60894
+    },
+    {
+      "type": "Circling",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Sovereign state",
+      "visits": 3,
+      "seq": 37,
+      "t": 60895
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 14,
+      "from": "Sovereign state",
+      "to": "Charter of the United Nations",
+      "index": 27,
+      "usage": {
+        "promptTokens": 1461,
+        "completionTokens": 20,
+        "totalTokens": 1481,
+        "costUsd": 0.00032582
+      },
+      "latencyMs": 979,
+      "reason": "Choose a link related to international law.",
+      "seq": 38,
+      "t": 63466
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 15,
+      "from": "Charter of the United Nations",
+      "to": "United Kingdom",
+      "index": 6,
+      "usage": {
+        "promptTokens": 1473,
+        "completionTokens": 25,
+        "totalTokens": 1498,
+        "costUsd": 0.00032956
+      },
+      "latencyMs": 640,
+      "reason": "Link to a country that may be related to the United Nations.",
+      "seq": 39,
+      "t": 64108
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "United Kingdom",
+      "visits": 3,
+      "seq": 40,
+      "t": 64109
+    },
+    {
+      "type": "Circling",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "United Kingdom",
+      "visits": 3,
+      "seq": 41,
+      "t": 64110
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 16,
+      "from": "United Kingdom",
+      "to": "Wales",
+      "index": 78,
+      "usage": {
+        "promptTokens": 1880,
+        "completionTokens": 34,
+        "totalTokens": 1914,
+        "costUsd": 0.00042108
+      },
+      "latencyMs": 779,
+      "reason": "Clicking on 'England' as it is a broad hub article that could link to 'John Howard'.",
+      "seq": 42,
+      "t": 64890
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Wales",
+      "visits": 3,
+      "seq": 43,
+      "t": 64891
+    },
+    {
+      "type": "Circling",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Wales",
+      "visits": 3,
+      "seq": 44,
+      "t": 64892
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 17,
+      "from": "Wales",
+      "to": "Welsh people",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1844,
+        "completionTokens": 27,
+        "totalTokens": 1871,
+        "costUsd": 0.00041162
+      },
+      "latencyMs": 627,
+      "reason": "The article about the people of Wales may link to a politician from Wales.",
+      "seq": 45,
+      "t": 67743
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 18,
+      "from": "Welsh people",
+      "to": "Nation",
+      "index": 26,
+      "usage": {
+        "promptTokens": 1715,
+        "completionTokens": 22,
+        "totalTokens": 1737,
+        "costUsd": 0.00038214
+      },
+      "latencyMs": 1946,
+      "reason": "Choose a link related to the target's nationality.",
+      "seq": 46,
+      "t": 71726
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 19,
+      "from": "Nation",
+      "to": "State (polity)",
+      "index": 19,
+      "usage": {
+        "promptTokens": 1651,
+        "completionTokens": 32,
+        "totalTokens": 1683,
+        "costUsd": 0.00037026
+      },
+      "latencyMs": 690,
+      "reason": "State (polity) is a broad hub article that may link to the target article John Howard.",
+      "seq": 47,
+      "t": 75352
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 20,
+      "from": "State (polity)",
+      "to": "Province",
+      "index": 14,
+      "usage": {
+        "promptTokens": 1653,
+        "completionTokens": 20,
+        "totalTokens": 1673,
+        "costUsd": 0.00036806
+      },
+      "latencyMs": 575,
+      "reason": "A state is often divided into provinces.",
+      "seq": 48,
+      "t": 78365
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 21,
+      "from": "Province",
+      "to": "State (polity)",
+      "index": 3,
+      "usage": {
+        "promptTokens": 1601,
+        "completionTokens": 35,
+        "totalTokens": 1636,
+        "costUsd": 0.00035992
+      },
+      "latencyMs": 726,
+      "reason": "Linking to a broad hub article, Ancient Roman, to increase chances of reaching the target article in few clicks.",
+      "seq": 49,
+      "t": 79094
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "State (polity)",
+      "visits": 2,
+      "seq": 50,
+      "t": 79096
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 22,
+      "from": "State (polity)",
+      "to": "Province",
+      "index": 14,
+      "usage": {
+        "promptTokens": 1666,
+        "completionTokens": 28,
+        "totalTokens": 1694,
+        "costUsd": 0.00037268
+      },
+      "latencyMs": 635,
+      "reason": "This link is a type of state, which is relevant to the current article.",
+      "seq": 51,
+      "t": 79732
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Province",
+      "visits": 2,
+      "seq": 52,
+      "t": 79733
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 23,
+      "from": "Province",
+      "to": "State (polity)",
+      "index": 3,
+      "usage": {
+        "promptTokens": 1613,
+        "completionTokens": 27,
+        "totalTokens": 1640,
+        "costUsd": 0.0003608
+      },
+      "latencyMs": 639,
+      "reason": "Linking to Roman province as it is related to the concept of province.",
+      "seq": 53,
+      "t": 80374
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "State (polity)",
+      "visits": 3,
+      "seq": 54,
+      "t": 80376
+    },
+    {
+      "type": "Circling",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "State (polity)",
+      "visits": 3,
+      "seq": 55,
+      "t": 80377
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 24,
+      "from": "State (polity)",
+      "to": "Province",
+      "index": 14,
+      "usage": {
+        "promptTokens": 1682,
+        "completionTokens": 17,
+        "totalTokens": 1699,
+        "costUsd": 0.00037378
+      },
+      "latencyMs": 547,
+      "reason": "Link to a related concept",
+      "seq": 56,
+      "t": 80925
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Province",
+      "visits": 3,
+      "seq": 57,
+      "t": 80927
+    },
+    {
+      "type": "Circling",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Province",
+      "visits": 3,
+      "seq": 58,
+      "t": 80928
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 25,
+      "from": "Province",
+      "to": "Country",
+      "index": 2,
+      "usage": {
+        "promptTokens": 1614,
+        "completionTokens": 24,
+        "totalTokens": 1638,
+        "costUsd": 0.00036036
+      },
+      "latencyMs": 614,
+      "reason": "Country is a broad hub article that could link to Australia.",
+      "seq": 59,
+      "t": 81543
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Country",
+      "visits": 2,
+      "seq": 60,
+      "t": 81545
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 26,
+      "from": "Country",
+      "to": "Canada",
+      "index": 27,
+      "usage": {
+        "promptTokens": 1655,
+        "completionTokens": 25,
+        "totalTokens": 1680,
+        "costUsd": 0.0003696
+      },
+      "latencyMs": 615,
+      "reason": "Link to a country that is likely to have a notable politician.",
+      "seq": 61,
+      "t": 85068
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 27,
+      "from": "Canada",
+      "to": "Balfour Declaration of 1926",
+      "index": 27,
+      "usage": {
+        "promptTokens": 1801,
+        "completionTokens": 41,
+        "totalTokens": 1842,
+        "costUsd": 0.00040524
+      },
+      "latencyMs": 974,
+      "reason": "The Balfour Declaration of 1926 is a significant event in Canadian history, so it's a good choice to learn more about it.",
+      "seq": 62,
+      "t": 87922
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 28,
+      "from": "Balfour Declaration of 1926",
+      "to": "Canada",
+      "index": 21,
+      "usage": {
+        "promptTokens": 950,
+        "completionTokens": 22,
+        "totalTokens": 972,
+        "costUsd": 0.00021384
+      },
+      "latencyMs": 577,
+      "reason": "Link to a country, a broad hub article.",
+      "seq": 63,
+      "t": 88501
+    },
+    {
+      "type": "Revisited",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "title": "Canada",
+      "visits": 2,
+      "seq": 64,
+      "t": 88502
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 29,
+      "from": "Canada",
+      "to": "Provinces and territories of Canada",
+      "index": 54,
+      "usage": {
+        "promptTokens": 1826,
+        "completionTokens": 32,
+        "totalTokens": 1858,
+        "costUsd": 0.00040876
+      },
+      "latencyMs": 684,
+      "reason": "Link to provinces and territories of Canada, which may lead to a province that links to John Howard.",
+      "seq": 65,
+      "t": 91514
+    },
+    {
+      "type": "StepTaken",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "step": 30,
+      "from": "Provinces and territories of Canada",
+      "to": "Constitution of Canada",
+      "index": 5,
+      "usage": {
+        "promptTokens": 1735,
+        "completionTokens": 28,
+        "totalTokens": 1763,
+        "costUsd": 0.00038786
+      },
+      "latencyMs": 818,
+      "reason": "Constitution of Canada is a broad hub article that may link to John Howard.",
+      "seq": 66,
+      "t": 96027
+    },
+    {
+      "type": "GaveUp",
+      "racerId": "meta-llama/llama-3.1-8b-instruct",
+      "steps": 30,
+      "seq": 67,
+      "t": 96028
+    },
+    {
+      "type": "RaceEnded",
+      "reason": "all-done",
+      "seq": 68,
+      "t": 96029
+    }
+  ]
+}
