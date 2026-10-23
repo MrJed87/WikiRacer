@@ -278,6 +278,13 @@ body {
   padding: 8px 14px;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  /* With the node scale slider the bar is wide: wrap to a second row on narrower screens
+     instead of squeezing the title card. */
+  flex-wrap: wrap;
+}
+
+#controls-slot {
+  min-width: 0;
 }
 
 .controls-group {
@@ -303,6 +310,7 @@ body {
   color: var(--muted);
   display: flex;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .speed-val {
@@ -315,6 +323,15 @@ body {
   width: 90px;
   accent-color: var(--accent);
   cursor: pointer;
+}
+
+/* The scale reads "0.5x" to "3.0x", so its value needs less room than the speed's "2000ms". */
+.node-scale-val {
+  min-width: 28px;
+}
+
+.node-scale-group .range-slider {
+  width: 72px;
 }
 
 /* Replay Controls Bar */

@@ -5,7 +5,7 @@
  * GraphRenderer Canvas 2D simulation, and ResultsModal.
  */
 import './styles.css';
-import { APP_NAME, RACE_DEFAULTS } from './config';
+import { APP_NAME, RACE_DEFAULTS, clampNodeScale } from './config';
 import { createDemoWiki, DEMO_START, DEMO_TARGET } from './mock/demoWorld';
 import { MockProvider } from './mock/mockProvider';
 import {
@@ -32,8 +32,10 @@ import { ResultsModal } from './ui/resultsModal';
 import { toast } from './ui/toasts';
 import {
   getCostHistory,
+  getNodeScale,
   getThumbnailsEnabled,
   storeCostHistory,
+  storeNodeScale,
   storeThumbnailsEnabled,
 } from './ui/storage';
 import { mergeCostHistory } from './race/costHistory';
@@ -184,8 +186,22 @@ function requestThumbnails(graph: GraphModel): void {
   if (thumbnailsOn && thumbnailsAllowed) thumbnails.request(graph.nodes.keys());
 }
 
+// Node size: one remembered value shared by the live controls bar and the replay bar.
+let nodeScale = getNodeScale();
+renderer.setNodeScale(nodeScale);
+
+function applyNodeScale(scale: number): void {
+  nodeScale = clampNodeScale(scale);
+  storeNodeScale(nodeScale);
+  renderer.setNodeScale(nodeScale);
+  controls.setNodeScale(nodeScale);
+  activeReplayBar?.setNodeScale(nodeScale);
+}
+
 const controls = new Controls({
   container: controlsSlot,
+  nodeScale,
+  onNodeScaleChange: applyNodeScale,
   onShowResults: () => {
     if (lastResults) resultsModal.show(lastResults.state, lastResults.events);
   },
@@ -540,6 +556,8 @@ function launchReplay(data: ReplayData): void {
   const bar = new ReplayBar({
     container: controlsSlot,
     controller,
+    nodeScale,
+    onNodeScaleChange: applyNodeScale,
     onExit: () => {
       cleanupActiveReplay();
       setupPanel.setCanClose(true);

@@ -209,6 +209,94 @@ describe('GraphRenderer', () => {
     renderer.destroy();
   });
 
+  describe('node scale', () => {
+    /** Radii of every arc drawn in the next frame. */
+    async function drawnRadii(renderer: GraphRenderer): Promise<number[]> {
+      vi.mocked(mockCtx.arc).mockClear();
+      await new Promise((r) => setTimeout(r, 40));
+      renderer.destroy();
+      return vi.mocked(mockCtx.arc).mock.calls.map((call) => call[2]);
+    }
+
+    function startOnlyModel() {
+      return buildGraph([
+        { seq: 0, t: 0, type: 'RaceStarted', config: makeConfig(), racers, startedAtEpochMs: 0 },
+      ]);
+    }
+
+    it('defaults to 1x and clamps to 0.5x - 3x', () => {
+      const renderer = new GraphRenderer({
+        container: container as unknown as HTMLElement,
+        simulation: new GraphSimulation(),
+      });
+      expect(renderer.getNodeScale()).toBe(1);
+      renderer.setNodeScale(10);
+      expect(renderer.getNodeScale()).toBe(3);
+      renderer.setNodeScale(0);
+      expect(renderer.getNodeScale()).toBe(0.5);
+      renderer.setNodeScale(1.5);
+      expect(renderer.getNodeScale()).toBe(1.5);
+      renderer.destroy();
+    });
+
+    it('draws the node circles in proportion to the scale', async () => {
+      const draw = async (scale: number): Promise<number[]> => {
+        const renderer = new GraphRenderer({
+          container: container as unknown as HTMLElement,
+          simulation: new GraphSimulation(),
+        });
+        renderer.setNodeScale(scale);
+        renderer.setModel(startOnlyModel());
+        return drawnRadii(renderer);
+      };
+
+      // The start node is 11px at zoom 1 and 1x.
+      expect(await draw(1)).toContain(11);
+      expect(await draw(2)).toContain(22);
+      expect(await draw(3)).toContain(33);
+      expect(await draw(0.5)).toContain(5.5);
+    });
+
+    it('keeps the default hit area when shrinking and grows it when enlarging', () => {
+      const onClick = vi.fn();
+      const sim = new GraphSimulation();
+      const renderer = new GraphRenderer({
+        container: container as unknown as HTMLElement,
+        simulation: sim,
+        onClick,
+      });
+      renderer.setModel(startOnlyModel());
+      renderer.camera.x = 0;
+      renderer.camera.y = 0;
+      renderer.camera.zoom = 1;
+
+      const node = sim.nodes[0]!;
+      node.x = 0;
+      node.y = 0;
+      const centre = renderer.camera.worldToScreen({ x: 0, y: 0 });
+      const down = mockCanvas.listeners['pointerdown']![0]!;
+      const move = mockCanvas.listeners['pointermove']![0]!;
+      const up = mockCanvas.listeners['pointerup']![0]!;
+      const hit = (dx: number): boolean => {
+        onClick.mockClear();
+        move({ offsetX: centre.x + dx, offsetY: centre.y });
+        down({ offsetX: centre.x + dx, offsetY: centre.y, pointerId: 1 });
+        up({ pointerId: 1 });
+        return onClick.mock.calls.length > 0;
+      };
+
+      renderer.setNodeScale(0.5);
+      expect(hit(10)).toBe(true);
+      expect(hit(30)).toBe(false);
+
+      renderer.setNodeScale(3);
+      expect(hit(30)).toBe(true);
+      expect(hit(60)).toBe(false);
+
+      renderer.destroy();
+    });
+  });
+
   it('handles follow, focus, and hide racer modes', () => {
     const sim = new GraphSimulation();
     const renderer = new GraphRenderer({

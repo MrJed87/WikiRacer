@@ -7,7 +7,7 @@ It runs entirely in your browser. There is no backend: the app talks to [OpenRou
 ## Features
 
 - **Fair by design.** Every model gets the identical start, target, prompt, link cap, step limit and temperature. Races run in lockstep rounds by default, so everyone takes click N before anyone takes click N+1.
-- **Live graph.** A Canvas 2D neon renderer with pan, zoom, drag, a follow camera, article thumbnails inside the nodes, and thicker edges for repeated visits.
+- **Live graph.** A Canvas 2D neon renderer with pan, zoom, drag, a follow camera, article thumbnails inside the nodes, a node size slider (0.5x to 3x), and thicker edges for repeated visits.
 - **Scoreboard, log and results.** Live standings (clicks, current article, cost, latency), a stream of each model's reasoning, and a finish screen with a podium and fastest/fewest-clicks awards.
 - **Replays.** Every race is an append-only event log, so any run can be exported as JSON, imported later and scrubbed through step by step.
 - **Example replays.** Five real races between actual models ship with the app. Pick one from "Example replays" in the setup dialog to watch it without an API key.

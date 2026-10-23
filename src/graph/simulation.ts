@@ -32,7 +32,7 @@ export const LAYOUT = {
   charge: -130,
   chargeMaxDistance: 380,
   gravity: 0.035,
-  // Leaves room for 15px picture nodes plus their rings without overlap.
+  // Leaves room for 15px picture nodes plus their rings without overlap (at node scale 1).
   collideRadius: 18,
   /** How far from its parent a new node is born. */
   spawnMin: 34,
@@ -53,6 +53,8 @@ export class GraphSimulation {
     .id((d) => d.id)
     .distance(LAYOUT.linkDistance)
     .strength(LAYOUT.linkStrength);
+  private readonly collide = forceCollide<SimNode>(LAYOUT.collideRadius);
+  private collideRadius: number = LAYOUT.collideRadius;
   private seenVersion = -1;
   private lastModel: GraphModel | null = null;
   private readonly rng: () => number;
@@ -68,7 +70,7 @@ export class GraphSimulation {
           .distanceMax(LAYOUT.chargeMaxDistance)
           .theta(0.9),
       )
-      .force('collide', forceCollide<SimNode>(LAYOUT.collideRadius))
+      .force('collide', this.collide)
       // Gentle gravity (rather than forceCenter) keeps disconnected pieces, like the unreached target, in view.
       .force('x', forceX<SimNode>(0).strength(LAYOUT.gravity))
       .force('y', forceY<SimNode>(0).strength(LAYOUT.gravity))
@@ -179,6 +181,19 @@ export class GraphSimulation {
     const node: SimNode = { id, x, y };
     this.nodes.push(node);
     this.byId.set(id, node);
+  }
+
+  /**
+   * Make room for bigger nodes: the collision radius grows with the node scale so enlarged
+   * circles push apart instead of piling up. Shrinking nodes keep the default spacing, which
+   * leaves the layout alone. Only re-flows the graph when the spacing actually changes.
+   */
+  setNodeScale(scale: number): void {
+    const radius = LAYOUT.collideRadius * Math.max(1, scale);
+    if (radius === this.collideRadius) return;
+    this.collideRadius = radius;
+    this.collide.radius(radius);
+    this.reheat(LAYOUT.alphaOnChange);
   }
 
   reheat(alpha: number): void {

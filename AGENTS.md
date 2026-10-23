@@ -119,7 +119,8 @@ Module map and build log, newest work last. Keep it current (see Progress tracki
   - `src/ui/setupPanel.ts`: key input & test, model picker with search & pricing, target autocomplete, start picker, fairness settings.
   - `src/ui/scoreboard.ts`: live racer standings, clicks, current article, cost, latency, follow toggle.
   - `src/ui/logPanel.ts`: live event stream with model reasoning, auto-scroll, racer filter.
-  - `src/ui/controls.ts`: race controls (pause/resume, stop, speed slider, fit view).
+  - `src/ui/controls.ts`: race controls (pause/resume, stop, speed slider, node scale slider, fit view).
+  - `src/ui/nodeScaleControl.ts`: the node scale slider (0.5x to 3x, double-click resets), shared by the controls bar and the replay bar.
   - `src/ui/resultsModal.ts`: accessible `<dialog>` with podium, fastest and fewest clicks awards, path breakdowns.
 - **M6 Polish and Release (done):**
   - `src/race/replay.ts` & `src/ui/replayBar.ts`: reproducible JSON replay loader, timeline scrubber, play/pause, step-forward/step-backward, and speed controls.
@@ -132,6 +133,7 @@ Module map and build log, newest work last. Keep it current (see Progress tracki
   - Once the key is verified, the model list comes from OpenRouter's `GET /models/user`, so only models the account can run (provider preferences, privacy settings, guardrails) are offered. Falls back to the public list with a note if refused.
   - Presets pick 4 models from different families (vendor plus model line, e.g. `google/gemma` vs `google/gemini`) from that list: Fast & Cheap = cheapest by estimated step cost, Free = free models, Flagships = curated IDs the account can run, topped up from other families.
   - Article thumbnails inside graph nodes (Wikipedia page images, batched 50 per request on a separate client), with a 🖼 Pictures toggle in the controls bar that is remembered per browser.
+  - Node scale slider (0.5x to 3x, `NODE_SCALE` in `src/config.ts`) in both the controls bar and the replay bar, remembered per browser. It scales the node circles, their pictures, the racer head markers, label offsets and the hover/drag hit area (`GraphRenderer.setNodeScale`), and widens the layout's collision radius above 1x so enlarged nodes push apart (`GraphSimulation.setNodeScale`). Below 1x the layout is left alone.
   - Wikimedia politeness: every Wikipedia request in the app (setup, races, thumbnails) goes through one shared queue, one request at a time with a 100ms pause after each, per the [robot policy](https://wikitech.wikimedia.org/wiki/Robot_policy). Requests carry an `Api-User-Agent` header (`WIKI.appName` and `WIKI.contact` in `src/config.ts`; set a contact before sharing the app).
   - Races run in lockstep rounds by default (`lockstep` in the race config): every racer takes click N before anyone takes click N+1, while model calls within a round still run in parallel.
   - Visit cap (`maxVisitsPerPage`, default 3): after that many visits a page is no longer offered to that racer and `back` can't return to it. The separate circling threshold only labels and warns.

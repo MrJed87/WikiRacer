@@ -1,9 +1,10 @@
 /**
  * Race Controls Bar Component.
- * Controls pause/resume, stop, step delay speed slider, fit view, and new race trigger.
+ * Controls pause/resume, stop, step delay speed slider, node scale slider, fit view, and new race trigger.
  */
 import type { RaceManager } from '../race/raceManager';
 import type { RaceState } from '../race/types';
+import { NodeScaleControl } from './nodeScaleControl';
 
 export interface ControlsOptions {
   container: HTMLElement;
@@ -15,6 +16,9 @@ export interface ControlsOptions {
   onThumbnailsToggle: (enabled: boolean) => void;
   /** Reopens the finish screen for the last finished race. */
   onShowResults: () => void;
+  /** Node size multiplier (circles and the pictures in them). */
+  nodeScale: number;
+  onNodeScaleChange: (scale: number) => void;
 }
 
 export class Controls {
@@ -27,6 +31,7 @@ export class Controls {
   private thumbsBtn!: HTMLButtonElement;
   private resultsBtn!: HTMLButtonElement;
   private readonly onShowResults: () => void;
+  private readonly nodeScaleControl: NodeScaleControl;
 
   private pauseBtn!: HTMLButtonElement;
   private stopBtn!: HTMLButtonElement;
@@ -44,6 +49,11 @@ export class Controls {
     this.onThumbnailsToggle = opts.onThumbnailsToggle;
     this.onShowResults = opts.onShowResults;
     this.thumbnailsEnabled = opts.thumbnailsEnabled;
+    this.nodeScaleControl = new NodeScaleControl({
+      id: 'ctrl-node-scale',
+      value: opts.nodeScale,
+      onChange: opts.onNodeScaleChange,
+    });
 
     this.element = document.createElement('div');
     this.element.className = 'race-controls-bar';
@@ -66,6 +76,11 @@ export class Controls {
     this.pauseBtn.disabled = !isRunning;
     this.pauseBtn.textContent = isPaused ? '▶ Resume' : '⏸ Pause';
     this.stopBtn.disabled = !isRunning;
+  }
+
+  /** Keep the slider in step when the scale is changed from somewhere else (the replay bar). */
+  setNodeScale(scale: number): void {
+    this.nodeScaleControl.setValue(scale);
   }
 
   /** Enabled once a race has finished, so its results can be reopened. */
@@ -98,6 +113,10 @@ export class Controls {
 
       <div class="controls-divider"></div>
 
+      <div id="ctrl-node-scale-slot"></div>
+
+      <div class="controls-divider"></div>
+
       <div class="controls-group">
         <button type="button" class="btn" id="ctrl-results" title="Show the finish screen again (results and replay export)" disabled>🏁 Results</button>
         <button type="button" class="btn" id="ctrl-thumbs" title="Show article pictures in the graph nodes">🖼 Pictures</button>
@@ -105,6 +124,8 @@ export class Controls {
         <button type="button" class="btn" id="ctrl-new-race">⚙️ Setup</button>
       </div>
     `;
+
+    this.element.querySelector('#ctrl-node-scale-slot')!.replaceWith(this.nodeScaleControl.element);
 
     this.pauseBtn = this.element.querySelector('#ctrl-pause')!;
     this.stopBtn = this.element.querySelector('#ctrl-stop')!;

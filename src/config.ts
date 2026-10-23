@@ -104,6 +104,26 @@ export const STORAGE_KEYS = {
   settings: 'wgr.settings',
   wikiCache: 'wgr.wikiCache',
   thumbnails: 'wgr.thumbnails',
+  nodeScale: 'wgr.nodeScale',
   costHistory: 'wgr.costHistory',
   customGroup: 'wgr.customGroup',
 } as const;
+
+/** Node size multiplier for the graph view (circles and the pictures inside them). */
+export const NODE_SCALE = {
+  min: 0.5,
+  max: 3,
+  step: 0.1,
+  default: 1,
+} as const;
+
+/** Clamp to the allowed range; anything that isn't a finite number falls back to the default. */
+export function clampNodeScale(value: number): number {
+  if (!Number.isFinite(value)) return NODE_SCALE.default;
+  return Math.min(NODE_SCALE.max, Math.max(NODE_SCALE.min, value));
+}
+
+/** "1.5x" style label shared by every node scale control. */
+export function formatNodeScale(value: number): string {
+  return `${clampNodeScale(value).toFixed(1)}x`;
+}

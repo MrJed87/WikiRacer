@@ -5,17 +5,22 @@
  * speed adjustments, and exit replay controls.
  */
 import type { ReplayController } from '../race/replay';
+import { NodeScaleControl } from './nodeScaleControl';
 
 export interface ReplayBarOptions {
   container: HTMLElement;
   controller: ReplayController;
   onExit: () => void;
+  /** Node size multiplier (circles and the pictures in them). */
+  nodeScale: number;
+  onNodeScaleChange: (scale: number) => void;
 }
 
 export class ReplayBar {
   readonly element: HTMLElement;
   private readonly controller: ReplayController;
   private readonly onExit: () => void;
+  private readonly nodeScaleControl: NodeScaleControl;
 
   private playPauseBtn!: HTMLButtonElement;
   private stepBackBtn!: HTMLButtonElement;
@@ -31,6 +36,11 @@ export class ReplayBar {
   constructor(opts: ReplayBarOptions) {
     this.controller = opts.controller;
     this.onExit = opts.onExit;
+    this.nodeScaleControl = new NodeScaleControl({
+      id: 'rpl-node-scale',
+      value: opts.nodeScale,
+      onChange: opts.onNodeScaleChange,
+    });
 
     this.element = document.createElement('div');
     this.element.className = 'replay-bar';
@@ -62,6 +72,10 @@ export class ReplayBar {
 
       <div class="replay-divider"></div>
 
+      <div id="rpl-node-scale-slot"></div>
+
+      <div class="replay-divider"></div>
+
       <div class="replay-group">
         <select id="rpl-speed" class="text-input replay-speed-select" aria-label="Replay speed">
           <option value="800">0.5x</option>
@@ -73,6 +87,8 @@ export class ReplayBar {
       </div>
     `;
 
+    this.element.querySelector('#rpl-node-scale-slot')!.replaceWith(this.nodeScaleControl.element);
+
     this.playPauseBtn = this.element.querySelector('#rpl-play-pause')!;
     this.stepBackBtn = this.element.querySelector('#rpl-step-back')!;
     this.stepForwardBtn = this.element.querySelector('#rpl-step-forward')!;
@@ -81,6 +97,11 @@ export class ReplayBar {
     this.timeLabel = this.element.querySelector('#rpl-time')!;
     this.speedSelect = this.element.querySelector('#rpl-speed')!;
     this.exitBtn = this.element.querySelector('#rpl-exit')!;
+  }
+
+  /** Keep the slider in step when the scale is changed from somewhere else. */
+  setNodeScale(scale: number): void {
+    this.nodeScaleControl.setValue(scale);
   }
 
   private bind(): void {

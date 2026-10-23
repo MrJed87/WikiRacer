@@ -4,7 +4,7 @@
  * Security rule: never log, persist (beyond opt-in storage), URL-encode or export the API key.
  * The default is sessionStorage, so the key disappears when the tab closes.
  */
-import { STORAGE_KEYS } from '../config';
+import { clampNodeScale, NODE_SCALE, STORAGE_KEYS } from '../config';
 import { sanitiseCostHistory, type CostHistory } from '../race/costHistory';
 
 export interface SavedSettings {
@@ -105,6 +105,25 @@ export function getThumbnailsEnabled(): boolean {
 export function storeThumbnailsEnabled(enabled: boolean): void {
   try {
     localStorage.setItem(STORAGE_KEYS.thumbnails, enabled ? 'on' : 'off');
+  } catch {
+    // Graceful fallback
+  }
+}
+
+/** Saved node size multiplier (clamped), or the default when nothing valid is stored. */
+export function getNodeScale(): number {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.nodeScale);
+    if (raw === null) return NODE_SCALE.default;
+    return clampNodeScale(Number.parseFloat(raw));
+  } catch {
+    return NODE_SCALE.default;
+  }
+}
+
+export function storeNodeScale(scale: number): void {
+  try {
+    localStorage.setItem(STORAGE_KEYS.nodeScale, String(clampNodeScale(scale)));
   } catch {
     // Graceful fallback
   }

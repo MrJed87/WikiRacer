@@ -8,6 +8,7 @@
  *
  * Respects `prefers-reduced-motion` to tone down pulses and avoid rapid flashing.
  */
+import { clampNodeScale, NODE_SCALE } from '../config';
 import { Camera, boundsOf, nearest, type Point } from './camera';
 import { GRAPH_COLORS, racerColor, withAlpha } from './palette';
 import type { GraphModel, GraphNode } from './graphModel';
@@ -62,6 +63,9 @@ export class GraphRenderer {
   // Article thumbnails drawn inside nodes (fetched by the app, loaded here as images).
   private thumbnailsEnabled = true;
   private readonly images = new Map<string, HTMLImageElement>();
+
+  // Node size multiplier (circles, pictures, head markers and hit areas).
+  private nodeScale: number = NODE_SCALE.default;
 
   // Reduced motion preference
   private reducedMotion = false;
@@ -150,6 +154,34 @@ export class GraphRenderer {
     img.referrerPolicy = 'origin';
     img.src = url;
     this.images.set(id, img);
+  }
+
+  /** Resize every node (and the picture inside it) by this multiplier, within the allowed range. */
+  setNodeScale(scale: number): void {
+    this.nodeScale = clampNodeScale(scale);
+    this.sim.setNodeScale(this.nodeScale);
+  }
+
+  getNodeScale(): number {
+    return this.nodeScale;
+  }
+
+  /** Screen radius of a node's disc at the current zoom, optionally for a different node scale. */
+  private nodeRadius(node: GraphNode, hasImage: boolean, scale = this.nodeScale): number {
+    const baseRadius = node.isStart
+      ? 11
+      : node.isTarget
+        ? 13
+        : Math.min(5 + Math.log2(node.total + 1) * 2, 14);
+    const zoomScale = Math.min(Math.max(this.camera.zoom, 0.6), 2);
+    // Nodes with a picture grow a little so the thumbnail is recognisable.
+    return Math.max(4, Math.max(baseRadius, hasImage ? 15 : 0) * zoomScale) * scale;
+  }
+
+  /** How close (in world units) a pointer must be to a node centre to hit it. */
+  private hitRadiusWorld(): number {
+    // Bigger nodes get a bigger hit area; smaller ones keep the default so they stay easy to grab.
+    return (18 * Math.max(1, this.nodeScale)) / this.camera.zoom;
   }
 
   private readyImage(id: string): HTMLImageElement | null {
@@ -427,15 +459,8 @@ export class GraphRenderer {
       if (!simNode) continue;
 
       const p = this.camera.worldToScreen({ x: simNode.x, y: simNode.y });
-      const baseRadius = node.isStart
-        ? 11
-        : node.isTarget
-          ? 13
-          : Math.min(5 + Math.log2(node.total + 1) * 2, 14);
-      const zoomScale = Math.min(Math.max(this.camera.zoom, 0.6), 2);
       const img = this.readyImage(node.id);
-      // Nodes with a picture grow a little so the thumbnail is recognisable.
-      const radius = Math.max(4, Math.max(baseRadius, img ? 15 : 0) * zoomScale);
+      const radius = this.nodeRadius(node, img !== null);
 
       // 1. Target node glowing gold beacon
       if (node.isTarget) {
@@ -537,14 +562,14 @@ export class GraphRenderer {
       ctx.strokeStyle = isDim ? withAlpha(color, 0.15) : withAlpha(color, 0.6);
       ctx.lineWidth = 3.5;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 14 + pulse, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, (14 + pulse) * this.nodeScale, 0, Math.PI * 2);
       ctx.stroke();
       ctx.restore();
 
       // Solid inner racer marker dot
       ctx.fillStyle = isDim ? withAlpha(color, 0.3) : color;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 5 * this.nodeScale, 0, Math.PI * 2);
       ctx.fill();
     }
   }
@@ -570,7 +595,13 @@ export class GraphRenderer {
       if (!simNode) continue;
 
       const p = this.camera.worldToScreen({ x: simNode.x, y: simNode.y });
-      const yOffset = node.isTarget || node.isStart ? 16 : 10;
+      // Labels sit just below the node, so they move out by however much the scale grew it.
+      const hasImage = this.readyImage(node.id) !== null;
+      const growth =
+        this.nodeScale === 1
+          ? 0
+          : this.nodeRadius(node, hasImage) - this.nodeRadius(node, hasImage, 1);
+      const yOffset = (node.isTarget || node.isStart ? 16 : 10) + growth;
 
       let text = node.id;
       if (node.isTarget) text = `🎯 ${text}`;
@@ -596,8 +627,7 @@ export class GraphRenderer {
       el.setPointerCapture(e.pointerId);
 
       const worldPos = this.camera.screenToWorld(this.pointerDownPos);
-      const hitRadiusWorld = 18 / this.camera.zoom;
-      const hitNode = nearest(this.sim.nodes, worldPos, hitRadiusWorld);
+      const hitNode = nearest(this.sim.nodes, worldPos, this.hitRadiusWorld());
 
       if (hitNode) {
         this.draggedNodeId = hitNode.id;
@@ -626,8 +656,7 @@ export class GraphRenderer {
       } else {
         // Hit-test for hover
         const worldPos = this.camera.screenToWorld(current);
-        const hitRadiusWorld = 18 / this.camera.zoom;
-        const nearestNode = nearest(this.sim.nodes, worldPos, hitRadiusWorld);
+        const nearestNode = nearest(this.sim.nodes, worldPos, this.hitRadiusWorld());
         const node =
           nearestNode && this.model ? (this.model.nodes.get(nearestNode.id) ?? null) : null;
 
