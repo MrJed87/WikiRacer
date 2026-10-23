@@ -8,7 +8,7 @@
  *
  * Respects `prefers-reduced-motion` to tone down pulses and avoid rapid flashing.
  */
-import { clampNodeScale, NODE_SCALE } from '../config';
+import { clampNodeScale, edgeScaleFor, NODE_SCALE } from '../config';
 import { Camera, boundsOf, nearest, type Point } from './camera';
 import { GRAPH_COLORS, racerColor, withAlpha } from './palette';
 import type { GraphModel, GraphNode } from './graphModel';
@@ -66,6 +66,8 @@ export class GraphRenderer {
 
   // Node size multiplier (circles, pictures, head markers and hit areas).
   private nodeScale: number = NODE_SCALE.default;
+  // Lines (edges and arrowheads) scale at half the rate of the nodes.
+  private edgeScale = 1;
 
   // Reduced motion preference
   private reducedMotion = false;
@@ -158,12 +160,15 @@ export class GraphRenderer {
 
   /**
    * Resize every node (and the picture inside it) by this multiplier, within the allowed range.
-   * Edges follow: thicker or thinner lines and arrowheads here, longer or shorter in the layout.
+   * Edges follow at half the rate: thicker or thinner lines and arrowheads here, longer or shorter
+   * in the layout.
    */
   setNodeScale(scale: number): void {
     const next = clampNodeScale(scale);
-    const ratio = next / this.nodeScale;
+    const nextEdge = edgeScaleFor(next);
+    const ratio = nextEdge / this.edgeScale;
     this.nodeScale = next;
+    this.edgeScale = nextEdge;
     this.sim.setNodeScale(next);
     // The layout stretches about the origin; carry the camera with it so the same part of the
     // graph stays in the middle of the screen.
@@ -397,12 +402,12 @@ export class GraphRenderer {
       entries.forEach(([racerId, count], i) => {
         const color = this.getRacerColor(racerId);
         const isDimmed = this.focusedRacerId !== null && this.focusedRacerId !== racerId;
-        // Lines scale with the nodes so they don't vanish next to big ones (or dominate small ones).
-        const baseWidth = Math.max(1.2, 1.6 * this.camera.zoom) * this.nodeScale;
+        // Lines follow the node scale at half the rate, so they don't vanish next to big nodes.
+        const baseWidth = Math.max(1.2, 1.6 * this.camera.zoom) * this.edgeScale;
         // Repeated-edge thickening: circling makes edges noticeably thicker!
         const strokeWidth = Math.max(
           0.8,
-          baseWidth + Math.min(count - 1, 6) * 1.3 * this.nodeScale,
+          baseWidth + Math.min(count - 1, 6) * 1.3 * this.edgeScale,
         );
 
         // Offset multi-racer parallel paths slightly perpendicular to edge
@@ -439,7 +444,7 @@ export class GraphRenderer {
         ctx.stroke();
 
         // Directional arrowhead near the target node
-        if (len > 30 * this.nodeScale) {
+        if (len > 30 * this.edgeScale) {
           // Sits just outside the target disc, so it moves out by however much the scale grew it.
           const toNode = this.model?.nodes.get(edge.to);
           const toHasImage = toNode ? this.readyImage(toNode.id) !== null : false;
@@ -449,7 +454,7 @@ export class GraphRenderer {
           const arrowDist = 18 * this.camera.zoom + growth;
           const arrowX = x2 - (dx / len) * arrowDist;
           const arrowY = y2 - (dy / len) * arrowDist;
-          const arrowSize = Math.max(3, 4.5 * Math.min(this.camera.zoom, 1.5)) * this.nodeScale;
+          const arrowSize = Math.max(3, 4.5 * Math.min(this.camera.zoom, 1.5)) * this.edgeScale;
 
           ctx.fillStyle = isDimmed ? withAlpha(color, 0.2) : color;
           ctx.beginPath();

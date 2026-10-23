@@ -15,6 +15,7 @@ import {
   type SimulationLinkDatum,
   type SimulationNodeDatum,
 } from 'd3-force';
+import { edgeScaleFor } from '../config';
 import { seededRandom } from '../util/random';
 import type { GraphModel } from './graphModel';
 
@@ -59,8 +60,10 @@ export class GraphSimulation {
     .distanceMax(LAYOUT.chargeMaxDistance)
     .theta(0.9);
   private readonly collide = forceCollide<SimNode>(LAYOUT.collideRadius);
-  /** Node scale the layout is currently built for (1 = the original spacing). */
+  /** Node scale the collision radius is built for (1 = the original spacing). */
   private nodeScale = 1;
+  /** Edge scale the rest of the layout (link length, repulsion, spawn distances) is built for. */
+  private layoutScale = 1;
   private seenVersion = -1;
   private lastModel: GraphModel | null = null;
   private readonly rng: () => number;
@@ -168,11 +171,11 @@ export class GraphSimulation {
     let y: number;
     if (isTarget && !parent) {
       // Show the goal as a distant beacon.
-      x = Math.cos(angle) * LAYOUT.targetSpawnDistance * this.nodeScale;
-      y = Math.sin(angle) * LAYOUT.targetSpawnDistance * this.nodeScale;
+      x = Math.cos(angle) * LAYOUT.targetSpawnDistance * this.layoutScale;
+      y = Math.sin(angle) * LAYOUT.targetSpawnDistance * this.layoutScale;
     } else if (parent) {
       const r =
-        (LAYOUT.spawnMin + this.rng() * (LAYOUT.spawnMax - LAYOUT.spawnMin)) * this.nodeScale;
+        (LAYOUT.spawnMin + this.rng() * (LAYOUT.spawnMax - LAYOUT.spawnMin)) * this.layoutScale;
       x = parent.x + Math.cos(angle) * r;
       y = parent.y + Math.sin(angle) * r;
     } else {
@@ -185,17 +188,22 @@ export class GraphSimulation {
   }
 
   /**
-   * Stretch the whole layout with the node scale, so edges get longer (or shorter) along with the
-   * nodes instead of disappearing under them. Every length is multiplied by `scale`: link
-   * length, collision radius, repulsion range and where new nodes are born. Repulsion strength
-   * grows with the square of it so the forces stay in the same balance and the graph keeps its
-   * shape. Existing positions are scaled too (about the origin), so the change is immediate and
+   * Stretch the layout with the node scale, so edges get longer (or shorter) along with the nodes
+   * instead of disappearing under them. Edges move at half the nodes' rate (`edgeScaleFor`): link
+   * length, repulsion range and where new nodes are born follow that edge scale, while the collision
+   * radius follows the full node scale so enlarged nodes never overlap. Repulsion strength grows
+   * with the square of the edge scale so the forces stay in the same balance and the graph keeps
+   * its shape. Existing positions are scaled too (about the origin), so the change is immediate and
    * the layout only has to settle a little.
    */
   setNodeScale(scale: number): void {
     if (scale === this.nodeScale) return;
-    const ratio = scale / this.nodeScale;
     this.nodeScale = scale;
+    this.collide.radius(LAYOUT.collideRadius * scale);
+
+    const layout = edgeScaleFor(scale);
+    const ratio = layout / this.layoutScale;
+    this.layoutScale = layout;
 
     for (const n of this.nodes) {
       n.x *= ratio;
@@ -206,11 +214,10 @@ export class GraphSimulation {
       if (n.fy != null) n.fy *= ratio;
     }
 
-    this.link.distance(LAYOUT.linkDistance * scale);
+    this.link.distance(LAYOUT.linkDistance * layout);
     this.charge
-      .strength(LAYOUT.charge * scale * scale)
-      .distanceMax(LAYOUT.chargeMaxDistance * scale);
-    this.collide.radius(LAYOUT.collideRadius * scale);
+      .strength(LAYOUT.charge * layout * layout)
+      .distanceMax(LAYOUT.chargeMaxDistance * layout);
     this.reheat(0.2);
   }
 

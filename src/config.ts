@@ -123,6 +123,17 @@ export function clampNodeScale(value: number): number {
   return Math.min(NODE_SCALE.max, Math.max(NODE_SCALE.min, value));
 }
 
+/**
+ * How much of the node scale edges follow: lines grow and shrink at half the rate of the nodes,
+ * so 3x nodes get 2x lines (not 3x) and 0.5x nodes get 0.75x lines. Applies to thickness and length.
+ */
+export const EDGE_SCALE_RATE = 0.5;
+
+/** Edge (line) scale for a node scale: 1 at 1x, then moving at `EDGE_SCALE_RATE` of the nodes' pace. */
+export function edgeScaleFor(nodeScale: number): number {
+  return 1 + (clampNodeScale(nodeScale) - 1) * EDGE_SCALE_RATE;
+}
+
 /** "1.5x" style label shared by every node scale control. */
 export function formatNodeScale(value: number): string {
   return `${clampNodeScale(value).toFixed(1)}x`;

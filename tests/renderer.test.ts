@@ -294,12 +294,11 @@ describe('GraphRenderer', () => {
         return widths[0]!;
       };
 
+      // Lines scale at half the rate of the nodes: 3x nodes get 2x lines, 0.5x nodes 0.75x lines.
       const normal = await edgeWidth(1);
-      expect(await edgeWidth(3)).toBeCloseTo(normal * 3, 5);
-      expect(await edgeWidth(2)).toBeCloseTo(normal * 2, 5);
-      // Never thinner than a hairline, even at 0.5x.
-      expect(await edgeWidth(0.5)).toBeGreaterThan(0.5);
-      expect(await edgeWidth(0.5)).toBeLessThan(normal);
+      expect(await edgeWidth(3)).toBeCloseTo(normal * 2, 5);
+      expect(await edgeWidth(2)).toBeCloseTo(normal * 1.5, 5);
+      expect(await edgeWidth(0.5)).toBeCloseTo(normal * 0.75, 5);
     });
 
     it('keeps the same part of the graph centred when the layout stretches', () => {
@@ -309,12 +308,12 @@ describe('GraphRenderer', () => {
       });
       renderer.camera.x = 100;
       renderer.camera.y = -40;
-      renderer.setNodeScale(2);
-      expect(renderer.camera.x).toBe(200);
-      expect(renderer.camera.y).toBe(-80);
+      renderer.setNodeScale(3); // layout stretches 2x
+      expect(renderer.camera.x).toBeCloseTo(200, 6);
+      expect(renderer.camera.y).toBeCloseTo(-80, 6);
       renderer.setNodeScale(1);
-      expect(renderer.camera.x).toBe(100);
-      expect(renderer.camera.y).toBe(-40);
+      expect(renderer.camera.x).toBeCloseTo(100, 6);
+      expect(renderer.camera.y).toBeCloseTo(-40, 6);
       renderer.destroy();
     });
 

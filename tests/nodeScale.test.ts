@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { NODE_SCALE, STORAGE_KEYS, clampNodeScale, formatNodeScale } from '../src/config';
+import {
+  NODE_SCALE,
+  STORAGE_KEYS,
+  clampNodeScale,
+  edgeScaleFor,
+  formatNodeScale,
+} from '../src/config';
 import { LAYOUT, GraphSimulation } from '../src/graph/simulation';
 import { buildGraph } from '../src/graph/graphModel';
 import { ZERO_USAGE } from '../src/llm/types';
@@ -49,6 +55,20 @@ describe('node scale range', () => {
     expect(formatNodeScale(0.5)).toBe('0.5x');
     expect(formatNodeScale(3)).toBe('3.0x');
     expect(formatNodeScale(99)).toBe('3.0x');
+  });
+});
+
+describe('edge scale', () => {
+  it('moves at half the rate of the nodes', () => {
+    expect(edgeScaleFor(1)).toBe(1);
+    expect(edgeScaleFor(3)).toBe(2);
+    expect(edgeScaleFor(2)).toBe(1.5);
+    expect(edgeScaleFor(0.5)).toBe(0.75);
+  });
+
+  it('stays inside the range for out-of-range input', () => {
+    expect(edgeScaleFor(100)).toBe(2);
+    expect(edgeScaleFor(-5)).toBe(0.75);
   });
 });
 
@@ -129,13 +149,14 @@ describe('GraphSimulation node scale', () => {
     return Math.hypot(a!.x - b!.x, a!.y - b!.y);
   }
 
-  it('makes edges longer and shorter in step with the scale', () => {
+  it('makes edges longer and shorter at half the rate of the nodes', () => {
     const base = settledEdgeLength(1);
     expect(base).toBeGreaterThan(0);
-    expect(settledEdgeLength(3) / base).toBeGreaterThan(2.7);
-    expect(settledEdgeLength(3) / base).toBeLessThan(3.3);
-    expect(settledEdgeLength(0.5) / base).toBeGreaterThan(0.45);
-    expect(settledEdgeLength(0.5) / base).toBeLessThan(0.55);
+    // 3x nodes get 2x edges; 0.5x nodes get 0.75x edges.
+    expect(settledEdgeLength(3) / base).toBeGreaterThan(1.8);
+    expect(settledEdgeLength(3) / base).toBeLessThan(2.2);
+    expect(settledEdgeLength(0.5) / base).toBeGreaterThan(0.7);
+    expect(settledEdgeLength(0.5) / base).toBeLessThan(0.8);
   });
 
   it('stretches an existing layout straight away instead of waiting for it to settle', () => {
@@ -143,7 +164,7 @@ describe('GraphSimulation node scale', () => {
     sim.sync(twoNodeModel());
     sim.step(5000);
     const before = sim.nodes.map((n) => ({ x: n.x, y: n.y }));
-    sim.setNodeScale(2);
+    sim.setNodeScale(3); // edges at 2x
     sim.nodes.forEach((n, i) => {
       expect(n.x).toBeCloseTo(before[i]!.x * 2, 6);
       expect(n.y).toBeCloseTo(before[i]!.y * 2, 6);
@@ -157,8 +178,9 @@ describe('GraphSimulation node scale', () => {
     sim.pin('Start', 10, -20);
     sim.setNodeScale(3);
     const start = sim.nodeById('Start')!;
-    expect(start.fx).toBe(30);
-    expect(start.fy).toBe(-60);
+    // 3x nodes stretch the layout 2x.
+    expect(start.fx).toBe(20);
+    expect(start.fy).toBe(-40);
   });
 
   it('does nothing when the scale has not changed', () => {
@@ -176,6 +198,6 @@ describe('GraphSimulation node scale', () => {
     sim.sync(twoNodeModel());
     // Start has no parent so it is born at the origin; the target is born far away, scaled.
     const target = sim.nodeById('Target')!;
-    expect(Math.hypot(target.x, target.y)).toBeGreaterThan(LAYOUT.targetSpawnDistance * 2);
+    expect(Math.hypot(target.x, target.y)).toBeCloseTo(LAYOUT.targetSpawnDistance * 2, 6);
   });
 });
